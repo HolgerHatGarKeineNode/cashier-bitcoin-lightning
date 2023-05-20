@@ -7,17 +7,17 @@ return [
     | Lnbits Keys
     |--------------------------------------------------------------------------
     |
-    | The Lnbits vendor ID and auth code will allow your application to call
-    | the Lnbits API. The "public" key is typically used when interacting
-    | with Lnbits.js while the "secret" key accesses private endpoints.
+    | The Lnbits admin key and Invoice/read key will allow your application to call
+    | the Lnbits API. The "Invoice/read key" key is typically used when interacting
+    | with Lnbits while the "admin key" key accesses private endpoints.
     |
     */
 
-    'vendor_id' => env('PADDLE_VENDOR_ID'),
+    'wallet_id' => env('LNBITS_WALLET_ID'),
 
-    'vendor_auth_code' => env('PADDLE_VENDOR_AUTH_CODE'),
+    'admin_key' => env('LNBITS_ADMIN_KEY'),
 
-    'public_key' => env('PADDLE_PUBLIC_KEY'),
+    'invoice_read_key' => env('LNBITS_READ_KEY'),
 
     /*
     |--------------------------------------------------------------------------
@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'path' => env('CASHIER_PATH', 'paddle'),
+    'path' => env('LNBITS_PATH', 'lnbits'),
 
     /*
     |--------------------------------------------------------------------------
@@ -70,18 +70,5 @@ return [
     */
 
     'currency_locale' => env('CASHIER_CURRENCY_LOCALE', 'en'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Lnbits Sandbox
-    |--------------------------------------------------------------------------
-    |
-    | This option allows you to toggle between the Lnbits live environment
-    | and its sandboxed environment. This feature is only available for
-    | a select group of vendors and not a publicly available feature.
-    |
-    */
-
-    'sandbox' => env('PADDLE_SANDBOX', false),
 
 ];
