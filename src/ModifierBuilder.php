@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Paddle;
+namespace Bitcoin\Lightning\Lnbits;
 
 use InvalidArgumentException;
 
@@ -9,7 +9,7 @@ class ModifierBuilder
     /**
      * The Subscription model the modifier belongs to.
      *
-     * @var \Laravel\Paddle\Subscription
+     * @var \Bitcoin\Lightning\Lnbits\Subscription
      */
     protected $subscription;
 
@@ -37,7 +37,7 @@ class ModifierBuilder
     /**
      * Create a new modifier builder instance.
      *
-     * @param  \Laravel\Paddle\Subscription  $subscription
+     * @param  \Bitcoin\Lightning\Lnbits\Subscription  $subscription
      * @param  float  $amount
      * @return void
      */
@@ -75,7 +75,7 @@ class ModifierBuilder
     /**
      * Create the modifier.
      *
-     * @return \Laravel\Paddle\Modifier
+     * @return \Bitcoin\Lightning\Lnbits\Modifier
      *
      * @throws \InvalidArgumentException
      */

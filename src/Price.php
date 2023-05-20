@@ -1,8 +1,8 @@
 <?php
 
-namespace Laravel\Paddle;
+namespace Bitcoin\Lightning\Lnbits;
 
-use Laravel\Paddle\Concerns\ManagesAmounts;
+use Bitcoin\Lightning\Lnbits\Concerns\ManagesAmounts;
 use Money\Currency;
 
 class Price
@@ -117,7 +117,7 @@ class Price
     }
 
     /**
-     * Dynamically get values from the Paddle price.
+     * Dynamically get values from the Lnbits price.
      *
      * @param  string  $key
      * @return mixed

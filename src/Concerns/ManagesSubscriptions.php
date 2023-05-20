@@ -1,10 +1,10 @@
 <?php
 
-namespace Laravel\Paddle\Concerns;
+namespace Bitcoin\Lightning\Lnbits\Concerns;
 
-use Laravel\Paddle\Cashier;
-use Laravel\Paddle\Subscription;
-use Laravel\Paddle\SubscriptionBuilder;
+use Bitcoin\Lightning\Lnbits\Cashier;
+use Bitcoin\Lightning\Lnbits\Subscription;
+use Bitcoin\Lightning\Lnbits\SubscriptionBuilder;
 
 trait ManagesSubscriptions
 {
@@ -13,7 +13,7 @@ trait ManagesSubscriptions
      *
      * @param  string  $name
      * @param  int  $plan
-     * @return \Laravel\Paddle\SubscriptionBuilder
+     * @return \Bitcoin\Lightning\Lnbits\SubscriptionBuilder
      */
     public function newSubscription($name, $plan)
     {
@@ -34,7 +34,7 @@ trait ManagesSubscriptions
      * Get a subscription instance by name.
      *
      * @param  string  $name
-     * @return \Laravel\Paddle\Subscription|null
+     * @return \Bitcoin\Lightning\Lnbits\Subscription|null
      */
     public function subscription($name = 'default')
     {

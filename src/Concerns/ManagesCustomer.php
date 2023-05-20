@@ -1,8 +1,8 @@
 <?php
 
-namespace Laravel\Paddle\Concerns;
+namespace Bitcoin\Lightning\Lnbits\Concerns;
 
-use Laravel\Paddle\Cashier;
+use Bitcoin\Lightning\Lnbits\Cashier;
 
 trait ManagesCustomer
 {
@@ -10,7 +10,7 @@ trait ManagesCustomer
      * Create a customer record for the billable model.
      *
      * @param  array  $attributes
-     * @return \Laravel\Paddle\Customer
+     * @return \Bitcoin\Lightning\Lnbits\Customer
      */
     public function createAsCustomer(array $attributes = [])
     {
@@ -44,7 +44,7 @@ trait ManagesCustomer
     }
 
     /**
-     * Get the billable model's email address to associate with Paddle.
+     * Get the billable model's email address to associate with Lnbits.
      *
      * @return string|null
      */
@@ -54,7 +54,7 @@ trait ManagesCustomer
     }
 
     /**
-     * Get the billable model's country to associate with Paddle.
+     * Get the billable model's country to associate with Lnbits.
      *
      * This needs to be a 2 letter code. See the link below for supported countries.
      *
@@ -68,7 +68,7 @@ trait ManagesCustomer
     }
 
     /**
-     * Get the billable model's postcode to associate with Paddle.
+     * Get the billable model's postcode to associate with Lnbits.
      *
      * See the link below for countries which require this.
      *

@@ -1,17 +1,17 @@
 <?php
 
-namespace Laravel\Paddle;
+namespace Bitcoin\Lightning\Lnbits;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use Laravel\Paddle\Events\PaymentSucceeded;
-use Laravel\Paddle\Events\SubscriptionCancelled;
-use Laravel\Paddle\Events\SubscriptionCreated;
-use Laravel\Paddle\Events\SubscriptionPaymentFailed;
-use Laravel\Paddle\Events\SubscriptionPaymentSucceeded;
-use Laravel\Paddle\Events\SubscriptionUpdated;
+use Bitcoin\Lightning\Lnbits\Events\PaymentSucceeded;
+use Bitcoin\Lightning\Lnbits\Events\SubscriptionCancelled;
+use Bitcoin\Lightning\Lnbits\Events\SubscriptionCreated;
+use Bitcoin\Lightning\Lnbits\Events\SubscriptionPaymentFailed;
+use Bitcoin\Lightning\Lnbits\Events\SubscriptionPaymentSucceeded;
+use Bitcoin\Lightning\Lnbits\Events\SubscriptionUpdated;
 
 class CashierFake
 {

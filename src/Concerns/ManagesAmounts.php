@@ -1,8 +1,8 @@
 <?php
 
-namespace Laravel\Paddle\Concerns;
+namespace Bitcoin\Lightning\Lnbits\Concerns;
 
-use Laravel\Paddle\Cashier;
+use Bitcoin\Lightning\Lnbits\Cashier;
 
 trait ManagesAmounts
 {
@@ -18,7 +18,7 @@ trait ManagesAmounts
     }
 
     /**
-     * Format the Paddle decimal into a displayable currency.
+     * Format the Lnbits decimal into a displayable currency.
      *
      * @param  float  $amount
      * @return string

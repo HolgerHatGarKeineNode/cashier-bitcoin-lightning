@@ -1,10 +1,10 @@
 <?php
 
-namespace Laravel\Paddle\Exceptions;
+namespace Bitcoin\Lightning\Lnbits\Exceptions;
 
 use Exception;
 
-class PaddleException extends Exception
+class LnbitsException extends Exception
 {
     //
 }

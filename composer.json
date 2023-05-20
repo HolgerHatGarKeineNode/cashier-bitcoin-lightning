@@ -41,7 +41,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Laravel\\Paddle\\": "src/"
+            "Bitcoin\\Lightning\\Lnbits\\": "src/"
         }
     },
     "autoload-dev": {
@@ -55,7 +55,7 @@
         },
         "laravel": {
             "providers": [
-                "Laravel\\Paddle\\CashierServiceProvider"
+                "Bitcoin\\Lightning\\Lnbits\\CashierServiceProvider"
             ]
         }
     },

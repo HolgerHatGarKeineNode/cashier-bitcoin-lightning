@@ -1,8 +1,8 @@
 <?php
 
-namespace Laravel\Paddle;
+namespace Bitcoin\Lightning\Lnbits;
 
-use Laravel\Paddle\Concerns\ManagesAmounts;
+use Bitcoin\Lightning\Lnbits\Concerns\ManagesAmounts;
 use Money\Currency;
 
 class Modifier
@@ -12,12 +12,12 @@ class Modifier
     /**
      * The Subscription model the modifier belongs to.
      *
-     * @var \Laravel\Paddle\Subscription
+     * @var \Bitcoin\Lightning\Lnbits\Subscription
      */
     protected $subscription;
 
     /**
-     * The raw modifier array as returned by Paddle.
+     * The raw modifier array as returned by Lnbits.
      *
      * @var array
      */
@@ -26,7 +26,7 @@ class Modifier
     /**
      * Create a new modifier instance.
      *
-     * @param  \Laravel\Paddle\Subscription  $subscription
+     * @param  \Bitcoin\Lightning\Lnbits\Subscription  $subscription
      * @param  array  $modifier
      * @return void
      */
@@ -37,7 +37,7 @@ class Modifier
     }
 
     /**
-     * Get the modifier's Paddle ID.
+     * Get the modifier's Lnbits ID.
      *
      * @return int
      */
@@ -49,7 +49,7 @@ class Modifier
     /**
      * Get the related subscription.
      *
-     * @return \Laravel\Paddle\Subscription
+     * @return \Bitcoin\Lightning\Lnbits\Subscription
      */
     public function subscription()
     {
@@ -107,7 +107,7 @@ class Modifier
     }
 
     /**
-     * Deletes itself on Paddle.
+     * Deletes itself on Lnbits.
      *
      * @return \Illuminate\Http\Client\Response
      */

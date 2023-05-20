@@ -1,13 +1,13 @@
 <?php
 
-namespace Laravel\Paddle\Components;
+namespace Bitcoin\Lightning\Lnbits\Components;
 
 use Illuminate\View\Component;
 
 class Checkout extends Component
 {
     /**
-     * The identifier for the Paddle checkout script and container.
+     * The identifier for the Lnbits checkout script and container.
      *
      * @var string
      */
@@ -21,7 +21,7 @@ class Checkout extends Component
     public $height;
 
     /**
-     * The options for the inline Paddle Checkout script.
+     * The options for the inline Lnbits Checkout script.
      *
      * @var array
      */
@@ -54,7 +54,7 @@ class Checkout extends Component
     }
 
     /**
-     * Get the options for the inline Paddle Checkout script.
+     * Get the options for the inline Lnbits Checkout script.
      *
      * @return array
      */

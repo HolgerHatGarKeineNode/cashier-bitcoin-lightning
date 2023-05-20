@@ -1,12 +1,12 @@
 <?php
 
-namespace Laravel\Paddle;
+namespace Bitcoin\Lightning\Lnbits;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use JsonSerializable;
-use Laravel\Paddle\Concerns\ManagesAmounts;
+use Bitcoin\Lightning\Lnbits\Concerns\ManagesAmounts;
 use Money\Currency;
 
 class Payment implements Arrayable, Jsonable, JsonSerializable

@@ -1,9 +1,9 @@
 <?php
 
-namespace Laravel\Paddle;
+namespace Bitcoin\Lightning\Lnbits;
 
 use Illuminate\Support\Facades\Http;
-use Laravel\Paddle\Exceptions\PaddleException;
+use Bitcoin\Lightning\Lnbits\Exceptions\LnbitsException;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
@@ -82,7 +82,7 @@ class Cashier
     }
 
     /**
-     * Get the Paddle webhook url.
+     * Get the Lnbits webhook url.
      *
      * @return string
      */
@@ -92,7 +92,7 @@ class Cashier
     }
 
     /**
-     * Get the Paddle vendors API url.
+     * Get the Lnbits vendors API url.
      *
      * @return string
      */
@@ -102,7 +102,7 @@ class Cashier
     }
 
     /**
-     * Get the Paddle checkout API url.
+     * Get the Lnbits checkout API url.
      *
      * @return string
      */
@@ -112,13 +112,13 @@ class Cashier
     }
 
     /**
-     * Perform a GET Paddle API call.
+     * Perform a GET Lnbits API call.
      *
      * @param  string  $uri
      * @param  array  $payload
      * @return \Illuminate\Http\Client\Response
      *
-     * @throws \Laravel\Paddle\Exceptions\PaddleException
+     * @throws \Bitcoin\Lightning\Lnbits\Exceptions\LnbitsException
      */
     public static function get($uri, array $payload = [])
     {
@@ -126,13 +126,13 @@ class Cashier
     }
 
     /**
-     * Perform a POST Paddle API call.
+     * Perform a POST Lnbits API call.
      *
      * @param  string  $uri
      * @param  array  $payload
      * @return \Illuminate\Http\Client\Response
      *
-     * @throws \Laravel\Paddle\Exceptions\PaddleException
+     * @throws \Bitcoin\Lightning\Lnbits\Exceptions\LnbitsException
      */
     public static function post($uri, array $payload = [])
     {
@@ -140,28 +140,28 @@ class Cashier
     }
 
     /**
-     * Perform a Paddle API call.
+     * Perform a Lnbits API call.
      *
      * @param  string  $method
      * @param  string  $uri
      * @param  array  $payload
      * @return \Illuminate\Http\Client\Response
      *
-     * @throws \Laravel\Paddle\Exceptions\PaddleException
+     * @throws \Bitcoin\Lightning\Lnbits\Exceptions\LnbitsException
      */
     protected static function makeApiCall($method, $uri, array $payload = [])
     {
         $response = Http::$method($uri, $payload);
 
         if ($response['success'] === false) {
-            throw new PaddleException($response['error']['message'], $response['error']['code']);
+            throw new LnbitsException($response['error']['message'], $response['error']['code']);
         }
 
         return $response;
     }
 
     /**
-     * Get the default Paddle API options.
+     * Get the default Lnbits API options.
      *
      * @param  array  $options
      * @return array
@@ -298,7 +298,7 @@ class Cashier
     /**
      * Create a fake Cashier instance.
      *
-     * @return \Laravel\Paddle\CashierFake
+     * @return \Bitcoin\Lightning\Lnbits\CashierFake
      */
     public static function fake(...$arguments)
     {

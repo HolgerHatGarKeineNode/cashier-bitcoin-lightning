@@ -1,11 +1,11 @@
 <?php
 
-namespace Laravel\Paddle\Events;
+namespace Bitcoin\Lightning\Lnbits\Events;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Laravel\Paddle\Receipt;
+use Bitcoin\Lightning\Lnbits\Receipt;
 
 class SubscriptionPaymentSucceeded
 {
@@ -21,7 +21,7 @@ class SubscriptionPaymentSucceeded
     /**
      * The receipt instance.
      *
-     * @var \Laravel\Paddle\Receipt
+     * @var \Bitcoin\Lightning\Lnbits\Receipt
      */
     public $receipt;
 
@@ -36,7 +36,7 @@ class SubscriptionPaymentSucceeded
      * Create a new event instance.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $billable
-     * @param  \Laravel\Paddle\Receipt  $receipt
+     * @param  \Bitcoin\Lightning\Lnbits\Receipt  $receipt
      * @param  array  $payload
      * @return void
      */

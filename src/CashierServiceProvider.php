@@ -1,11 +1,11 @@
 <?php
 
-namespace Laravel\Paddle;
+namespace Bitcoin\Lightning\Lnbits;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Paddle\Components\Checkout;
+use Bitcoin\Lightning\Lnbits\Components\Checkout;
 
 class CashierServiceProvider extends ServiceProvider
 {
@@ -46,7 +46,7 @@ class CashierServiceProvider extends ServiceProvider
         if (Cashier::$registersRoutes) {
             Route::group([
                 'prefix' => config('cashier.path'),
-                'namespace' => 'Laravel\Paddle\Http\Controllers',
+                'namespace' => 'Bitcoin\Lightning\Lnbits\Http\Controllers',
                 'as' => 'cashier.',
             ], function () {
                 $this->loadRoutesFrom(__DIR__.'/../routes/web.php');

@@ -1,8 +1,8 @@
 <?php
 
-namespace Laravel\Paddle\Concerns;
+namespace Bitcoin\Lightning\Lnbits\Concerns;
 
-use Laravel\Paddle\Cashier;
+use Bitcoin\Lightning\Lnbits\Cashier;
 
 trait ManagesReceipts
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Laravel\Paddle\Events;
+namespace Bitcoin\Lightning\Lnbits\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Laravel\Paddle\Subscription;
+use Bitcoin\Lightning\Lnbits\Subscription;
 
 class SubscriptionCancelled
 {
@@ -13,7 +13,7 @@ class SubscriptionCancelled
     /**
      * The subscription instance.
      *
-     * @var \Laravel\Paddle\Subscription
+     * @var \Bitcoin\Lightning\Lnbits\Subscription
      */
     public $subscription;
 
@@ -27,7 +27,7 @@ class SubscriptionCancelled
     /**
      * Create a new event instance.
      *
-     * @param  \Laravel\Paddle\Subscription  $subscription
+     * @param  \Bitcoin\Lightning\Lnbits\Subscription  $subscription
      * @param  array  $payload
      * @return void
      */

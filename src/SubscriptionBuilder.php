@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Paddle;
+namespace Bitcoin\Lightning\Lnbits;
 
 use Spatie\Url\Url;
 
@@ -9,7 +9,7 @@ class SubscriptionBuilder
     /**
      * The Billable model that is subscribing.
      *
-     * @var \Laravel\Paddle\Billable
+     * @var \Bitcoin\Lightning\Lnbits\Billable
      */
     protected $billable;
 
@@ -72,7 +72,7 @@ class SubscriptionBuilder
     /**
      * Create a new subscription builder instance.
      *
-     * @param  \Laravel\Paddle\Billable  $billable
+     * @param  \Bitcoin\Lightning\Lnbits\Billable  $billable
      * @param  string  $name
      * @param  int  $plan
      * @return void
@@ -176,7 +176,7 @@ class SubscriptionBuilder
         if (! is_null($trialDays = $this->getTrialEndForPayload())) {
             $payload['trial_days'] = $trialDays;
 
-            // Paddle will immediately charge the plan price for the trial days so we'll
+            // Lnbits will immediately charge the plan price for the trial days so we'll
             // need to explicitly set the prices to 0 for the first charge. If there's
             // no trial, we use the recurring_prices to charge the user immediately.
             $payload['prices'] = $payload['prices']
@@ -205,7 +205,7 @@ class SubscriptionBuilder
     }
 
     /**
-     * Get the days until the trial will expire for the Paddle payload.
+     * Get the days until the trial will expire for the Lnbits payload.
      *
      * @return int|null
      */
@@ -219,7 +219,7 @@ class SubscriptionBuilder
     }
 
     /**
-     * Get the plan prices for the Paddle payload.
+     * Get the plan prices for the Lnbits payload.
      *
      * @param  bool  $trialing
      * @return array

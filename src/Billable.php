@@ -1,11 +1,11 @@
 <?php
 
-namespace Laravel\Paddle;
+namespace Bitcoin\Lightning\Lnbits;
 
-use Laravel\Paddle\Concerns\ManagesCustomer;
-use Laravel\Paddle\Concerns\ManagesReceipts;
-use Laravel\Paddle\Concerns\ManagesSubscriptions;
-use Laravel\Paddle\Concerns\PerformsCharges;
+use Bitcoin\Lightning\Lnbits\Concerns\ManagesCustomer;
+use Bitcoin\Lightning\Lnbits\Concerns\ManagesReceipts;
+use Bitcoin\Lightning\Lnbits\Concerns\ManagesSubscriptions;
+use Bitcoin\Lightning\Lnbits\Concerns\PerformsCharges;
 
 trait Billable
 {
@@ -15,7 +15,7 @@ trait Billable
     use PerformsCharges;
 
     /**
-     * Get the default Paddle API options for the current Billable model.
+     * Get the default Lnbits API options for the current Billable model.
      *
      * @param  array  $options
      * @return array

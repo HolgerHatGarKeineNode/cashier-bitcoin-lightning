@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Paddle\Concerns;
+namespace Bitcoin\Lightning\Lnbits\Concerns;
 
 trait Prorates
 {

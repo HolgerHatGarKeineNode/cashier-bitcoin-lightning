@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Paddle\Events;
+namespace Bitcoin\Lightning\Lnbits\Events;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;

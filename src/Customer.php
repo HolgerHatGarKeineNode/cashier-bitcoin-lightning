@@ -1,11 +1,11 @@
 <?php
 
-namespace Laravel\Paddle;
+namespace Bitcoin\Lightning\Lnbits;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property \Laravel\Paddle\Billable $billable
+ * @property \Bitcoin\Lightning\Lnbits\Billable $billable
  */
 class Customer extends Model
 {
@@ -36,7 +36,7 @@ class Customer extends Model
     }
 
     /**
-     * Determine if the Paddle model is on a "generic" trial at the model level.
+     * Determine if the Lnbits model is on a "generic" trial at the model level.
      *
      * @return bool
      */
@@ -46,7 +46,7 @@ class Customer extends Model
     }
 
     /**
-     * Determine if the Paddle model has an expired "generic" trial at the model level.
+     * Determine if the Lnbits model has an expired "generic" trial at the model level.
      *
      * @return bool
      */

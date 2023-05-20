@@ -1,23 +1,23 @@
 <?php
 
-namespace Laravel\Paddle\Http\Controllers;
+namespace Bitcoin\Lightning\Lnbits\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
-use Laravel\Paddle\Cashier;
-use Laravel\Paddle\Events\PaymentSucceeded;
-use Laravel\Paddle\Events\SubscriptionCancelled;
-use Laravel\Paddle\Events\SubscriptionCreated;
-use Laravel\Paddle\Events\SubscriptionPaymentFailed;
-use Laravel\Paddle\Events\SubscriptionPaymentSucceeded;
-use Laravel\Paddle\Events\SubscriptionUpdated;
-use Laravel\Paddle\Events\WebhookHandled;
-use Laravel\Paddle\Events\WebhookReceived;
-use Laravel\Paddle\Exceptions\InvalidPassthroughPayload;
-use Laravel\Paddle\Http\Middleware\VerifyWebhookSignature;
-use Laravel\Paddle\Subscription;
+use Bitcoin\Lightning\Lnbits\Cashier;
+use Bitcoin\Lightning\Lnbits\Events\PaymentSucceeded;
+use Bitcoin\Lightning\Lnbits\Events\SubscriptionCancelled;
+use Bitcoin\Lightning\Lnbits\Events\SubscriptionCreated;
+use Bitcoin\Lightning\Lnbits\Events\SubscriptionPaymentFailed;
+use Bitcoin\Lightning\Lnbits\Events\SubscriptionPaymentSucceeded;
+use Bitcoin\Lightning\Lnbits\Events\SubscriptionUpdated;
+use Bitcoin\Lightning\Lnbits\Events\WebhookHandled;
+use Bitcoin\Lightning\Lnbits\Events\WebhookReceived;
+use Bitcoin\Lightning\Lnbits\Exceptions\InvalidPassthroughPayload;
+use Bitcoin\Lightning\Lnbits\Http\Middleware\VerifyWebhookSignature;
+use Bitcoin\Lightning\Lnbits\Subscription;
 use Symfony\Component\HttpFoundation\Response;
 
 class WebhookController extends Controller
@@ -35,7 +35,7 @@ class WebhookController extends Controller
     }
 
     /**
-     * Handle a Paddle webhook call.
+     * Handle a Lnbits webhook call.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -147,7 +147,7 @@ class WebhookController extends Controller
      * @param  array  $payload
      * @return void
      *
-     * @throws \Laravel\Paddle\Exceptions\InvalidPassthroughPayload
+     * @throws \Bitcoin\Lightning\Lnbits\Exceptions\InvalidPassthroughPayload
      */
     protected function handleSubscriptionCreated(array $payload)
     {
@@ -249,9 +249,9 @@ class WebhookController extends Controller
      * Find or create a customer based on the passthrough values and return the billable model.
      *
      * @param  string  $passthrough
-     * @return \Laravel\Paddle\Billable
+     * @return \Bitcoin\Lightning\Lnbits\Billable
      *
-     * @throws \Laravel\Paddle\Exceptions\InvalidPassthroughPayload
+     * @throws \Bitcoin\Lightning\Lnbits\Exceptions\InvalidPassthroughPayload
      */
     protected function findOrCreateCustomer(string $passthrough)
     {
@@ -268,10 +268,10 @@ class WebhookController extends Controller
     }
 
     /**
-     * Find the first subscription matching a Paddle subscription id.
+     * Find the first subscription matching a Lnbits subscription id.
      *
      * @param  string  $subscriptionId
-     * @return \Laravel\Paddle\Subscription|null
+     * @return \Bitcoin\Lightning\Lnbits\Subscription|null
      */
     protected function findSubscription(string $subscriptionId)
     {

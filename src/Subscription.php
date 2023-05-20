@@ -1,16 +1,16 @@
 <?php
 
-namespace Laravel\Paddle;
+namespace Bitcoin\Lightning\Lnbits;
 
 use Carbon\Carbon;
 use DateTimeInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Paddle\Concerns\Prorates;
+use Bitcoin\Lightning\Lnbits\Concerns\Prorates;
 use LogicException;
 
 /**
- * @property \Laravel\Paddle\Billable $billable
+ * @property \Bitcoin\Lightning\Lnbits\Billable $billable
  */
 class Subscription extends Model
 {
@@ -44,7 +44,7 @@ class Subscription extends Model
     ];
 
     /**
-     * The cached Paddle info for the subscription.
+     * The cached Lnbits info for the subscription.
      *
      * @var array
      */
@@ -446,10 +446,10 @@ class Subscription extends Model
         $this->guardAgainstUpdates('update quantities');
 
         if ($quantity < 1) {
-            throw new LogicException('Paddle does not allow subscriptions to have a quantity of zero.');
+            throw new LogicException('Lnbits does not allow subscriptions to have a quantity of zero.');
         }
 
-        $this->updatePaddleSubscription(array_merge($options, [
+        $this->updateLnbitsSubscription(array_merge($options, [
             'quantity' => $quantity,
             'prorate' => $this->prorate,
         ]));
@@ -464,7 +464,7 @@ class Subscription extends Model
     }
 
     /**
-     * Swap the subscription to a new Paddle plan.
+     * Swap the subscription to a new Lnbits plan.
      *
      * @param  int  $plan
      * @param  array  $options
@@ -474,7 +474,7 @@ class Subscription extends Model
     {
         $this->guardAgainstUpdates('swap plans');
 
-        $this->updatePaddleSubscription(array_merge($options, [
+        $this->updateLnbitsSubscription(array_merge($options, [
             'plan_id' => $plan,
             'prorate' => $this->prorate,
         ]));
@@ -489,7 +489,7 @@ class Subscription extends Model
     }
 
     /**
-     * Swap the subscription to a new Paddle plan, and invoice immediately.
+     * Swap the subscription to a new Lnbits plan, and invoice immediately.
      *
      * @param  int  $plan
      * @param  array  $options
@@ -509,7 +509,7 @@ class Subscription extends Model
      */
     public function pause()
     {
-        $this->updatePaddleSubscription([
+        $this->updateLnbitsSubscription([
             'pause' => true,
         ]);
 
@@ -532,7 +532,7 @@ class Subscription extends Model
      */
     public function unpause()
     {
-        $this->updatePaddleSubscription([
+        $this->updateLnbitsSubscription([
             'pause' => false,
         ]);
 
@@ -548,12 +548,12 @@ class Subscription extends Model
     }
 
     /**
-     * Update the underlying Paddle subscription information for the model.
+     * Update the underlying Lnbits subscription information for the model.
      *
      * @param  array  $options
      * @return array
      */
-    public function updatePaddleSubscription(array $options)
+    public function updateLnbitsSubscription(array $options)
     {
         $payload = $this->billable->paddleOptions(array_merge([
             'subscription_id' => $this->paddle_id,
@@ -567,7 +567,7 @@ class Subscription extends Model
     }
 
     /**
-     * Get the Paddle update url.
+     * Get the Lnbits update url.
      *
      * @return string
      */
@@ -580,7 +580,7 @@ class Subscription extends Model
      * Begin creating a new modifier.
      *
      * @param  float  $amount
-     * @return \Laravel\Paddle\ModifierBuilder
+     * @return \Bitcoin\Lightning\Lnbits\ModifierBuilder
      */
     public function newModifier($amount)
     {
@@ -607,7 +607,7 @@ class Subscription extends Model
      * Get a modifier instance by ID.
      *
      * @param  int  $id
-     * @return \Laravel\Paddle\Modifier|null
+     * @return \Bitcoin\Lightning\Lnbits\Modifier|null
      */
     public function modifier($id)
     {
@@ -675,7 +675,7 @@ class Subscription extends Model
     }
 
     /**
-     * Get the Paddle cancellation url.
+     * Get the Lnbits cancellation url.
      *
      * @return string
      */
@@ -687,7 +687,7 @@ class Subscription extends Model
     /**
      * Get the last payment for the subscription.
      *
-     * @return \Laravel\Paddle\Payment
+     * @return \Bitcoin\Lightning\Lnbits\Payment
      */
     public function lastPayment()
     {
@@ -699,7 +699,7 @@ class Subscription extends Model
     /**
      * Get the next payment for the subscription.
      *
-     * @return \Laravel\Paddle\Payment|null
+     * @return \Bitcoin\Lightning\Lnbits\Payment|null
      */
     public function nextPayment()
     {
@@ -763,7 +763,7 @@ class Subscription extends Model
     }
 
     /**
-     * Get raw information about the subscription from Paddle.
+     * Get raw information about the subscription from Lnbits.
      *
      * @return array
      */

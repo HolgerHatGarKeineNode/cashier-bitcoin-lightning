@@ -1,9 +1,9 @@
 <?php
 
-namespace Laravel\Paddle;
+namespace Bitcoin\Lightning\Lnbits;
 
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Paddle\Concerns\ManagesAmounts;
+use Bitcoin\Lightning\Lnbits\Concerns\ManagesAmounts;
 use Money\Currency;
 
 class Receipt extends Model

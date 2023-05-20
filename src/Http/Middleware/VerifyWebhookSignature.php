@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Paddle\Http\Middleware;
+namespace Bitcoin\Lightning\Lnbits\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Laravel\Paddle\Concerns;
+namespace Bitcoin\Lightning\Lnbits\Concerns;
 
 use InvalidArgumentException;
-use Laravel\Paddle\Cashier;
+use Bitcoin\Lightning\Lnbits\Cashier;
 use LogicException;
 
 trait PerformsCharges
@@ -59,7 +59,7 @@ trait PerformsCharges
 
         // We'll need a way to identify the user in any webhook we're catching so before
         // we make the API request we'll attach the authentication identifier to this
-        // payload so we can match it back to a user when handling Paddle webhooks.
+        // payload so we can match it back to a user when handling Lnbits webhooks.
         if (! isset($payload['passthrough'])) {
             $payload['passthrough'] = [];
         }
