@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Laravel\Paddle\Cashier;
-use Laravel\Paddle\ProductPrice;
+use Bitcoin\Lightning\Lnbits\Cashier;
+use Bitcoin\Lightning\Lnbits\ProductPrice;
 
 class PricesTest extends FeatureTestCase
 {

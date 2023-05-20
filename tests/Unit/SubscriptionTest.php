@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Laravel\Paddle\Subscription;
+use Bitcoin\Lightning\Lnbits\Subscription;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 

@@ -3,7 +3,7 @@
 namespace Tests\Fixtures;
 
 use Illuminate\Foundation\Auth\User as Model;
-use Laravel\Paddle\Billable;
+use Bitcoin\Lightning\Lnbits\Billable;
 
 class User extends Model
 {

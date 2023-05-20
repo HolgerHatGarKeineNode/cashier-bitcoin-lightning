@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use Illuminate\Support\Facades\Http;
-use Laravel\Paddle\Cashier;
-use Laravel\Paddle\Modifier;
-use Laravel\Paddle\Subscription;
+use Bitcoin\Lightning\Lnbits\Cashier;
+use Bitcoin\Lightning\Lnbits\Modifier;
+use Bitcoin\Lightning\Lnbits\Subscription;
 use Money\Currency;
 
 class ModifiersTest extends FeatureTestCase
@@ -77,7 +77,7 @@ class ModifiersTest extends FeatureTestCase
             'quantity' => 1,
         ]);
 
-        /** @var \Laravel\Paddle\Modifier $modifier */
+        /** @var \Bitcoin\Lightning\Lnbits\Modifier $modifier */
         $modifier = $subscription->newModifier(15.00)
             ->description('Our test description')
             ->oneTime()

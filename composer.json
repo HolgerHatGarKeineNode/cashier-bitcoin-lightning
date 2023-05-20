@@ -1,6 +1,6 @@
 {
     "name": "HolgerHatGarKeineNode/cashier-bitcoin-lightning",
-    "description": "Cashier Bitcoin Lightning provides an expressive, fluent interface to Paddle's subscription billing services.",
+    "description": "Cashier Bitcoin Lightning provides an expressive, fluent interface to Lnbits's subscription billing services.",
     "keywords": ["laravel", "bitcoin", "lightning", "billing"],
     "license": "MIT",
     "support": {

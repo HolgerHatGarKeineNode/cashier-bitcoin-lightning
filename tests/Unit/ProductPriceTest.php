@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use Laravel\Paddle\Price;
-use Laravel\Paddle\ProductPrice;
+use Bitcoin\Lightning\Lnbits\Price;
+use Bitcoin\Lightning\Lnbits\ProductPrice;
 use Money\Currency;
 use PHPUnit\Framework\TestCase;
 
@@ -97,7 +97,7 @@ class ProductPriceTest extends TestCase
      * Get a test product price object.
      *
      * @param  array  $product
-     * @return \Laravel\Paddle\ProductPrice
+     * @return \Bitcoin\Lightning\Lnbits\ProductPrice
      */
     private function product(array $product = [])
     {

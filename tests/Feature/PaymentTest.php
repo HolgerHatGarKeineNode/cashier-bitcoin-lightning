@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use Laravel\Paddle\Payment;
+use Bitcoin\Lightning\Lnbits\Payment;
 use Money\Currency;
 
 class PaymentTest extends FeatureTestCase

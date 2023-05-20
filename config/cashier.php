@@ -4,12 +4,12 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Paddle Keys
+    | Lnbits Keys
     |--------------------------------------------------------------------------
     |
-    | The Paddle vendor ID and auth code will allow your application to call
-    | the Paddle API. The "public" key is typically used when interacting
-    | with Paddle.js while the "secret" key accesses private endpoints.
+    | The Lnbits vendor ID and auth code will allow your application to call
+    | the Lnbits API. The "public" key is typically used when interacting
+    | with Lnbits.js while the "secret" key accesses private endpoints.
     |
     */
 
@@ -37,7 +37,7 @@ return [
     | Cashier Webhook
     |--------------------------------------------------------------------------
     |
-    | This is the base URI where webhooks from Paddle will be sent. The URL
+    | This is the base URI where webhooks from Lnbits will be sent. The URL
     | built into Cashier Bitcoin Lightning is used by default; however, you can add
     | a custom URL when required for any application testing purposes.
     |
@@ -52,7 +52,7 @@ return [
     |
     | This is the default currency that will be used when generating charges
     | from your application. Of course, you are welcome to use any of the
-    | various world currencies that are currently supported via Paddle.
+    | various world currencies that are currently supported via Lnbits.
     |
     */
 
@@ -73,10 +73,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Paddle Sandbox
+    | Lnbits Sandbox
     |--------------------------------------------------------------------------
     |
-    | This option allows you to toggle between the Paddle live environment
+    | This option allows you to toggle between the Lnbits live environment
     | and its sandboxed environment. This feature is only available for
     | a select group of vendors and not a publicly available feature.
     |

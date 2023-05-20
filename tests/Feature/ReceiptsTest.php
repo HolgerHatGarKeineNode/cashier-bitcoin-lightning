@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use Laravel\Paddle\Receipt;
+use Bitcoin\Lightning\Lnbits\Receipt;
 use Money\Currency;
 
 class ReceiptsTest extends FeatureTestCase

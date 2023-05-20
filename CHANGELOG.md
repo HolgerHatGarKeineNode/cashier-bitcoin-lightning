@@ -101,7 +101,7 @@
 
 ### Fixed
 
-- Update environment sandbox Paddle.js ([#129](https://github.com/laravel/cashier-paddle/pull/129))
+- Update environment sandbox Lnbits.js ([#129](https://github.com/laravel/cashier-paddle/pull/129))
 - Fix refunds ([#131](https://github.com/laravel/cashier-paddle/pull/131))
 
 ## [v1.4.5 (2021-06-08)](https://github.com/laravel/cashier-paddle/compare/v1.4.4...v1.4.5)
@@ -214,7 +214,7 @@
 
 - Prevent swapping during trial ([#19](https://github.com/laravel/cashier-paddle/pull/19))
 - Reset pause state after unpausing ([7d80186](https://github.com/laravel/cashier-paddle/commit/7d80186450b440d453cb5da2bae4afba292e0190))
-- Handle Paddle not charging immediately when trial_days=0 ([#35](https://github.com/laravel/cashier-paddle/pull/35))
+- Handle Lnbits not charging immediately when trial_days=0 ([#35](https://github.com/laravel/cashier-paddle/pull/35))
 - Prevent updating quantities during trial ([fcc8b35](https://github.com/laravel/cashier-paddle/commit/fcc8b35485b48d3a392c1e70c368502e69a12d4b))
 - Prevent cancelling during grace period ([5016fea](https://github.com/laravel/cashier-paddle/commit/5016fea882bec694101aa07bba2be57ca534a794))
 

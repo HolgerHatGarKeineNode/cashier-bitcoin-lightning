@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Carbon\Carbon;
-use Laravel\Paddle\Customer;
+use Bitcoin\Lightning\Lnbits\Customer;
 use PHPUnit\Framework\TestCase;
 use Tests\Fixtures\User;
 

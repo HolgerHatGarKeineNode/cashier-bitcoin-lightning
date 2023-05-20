@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use Laravel\Paddle\Cashier;
+use Bitcoin\Lightning\Lnbits\Cashier;
 
 class ChargesTest extends FeatureTestCase
 {
     public function test_customers_can_retrieve_a_single_charge_link()
     {
         if (! getenv('PADDLE_VENDOR_ID') || ! getenv('PADDLE_VENDOR_AUTH_CODE')) {
-            $this->markTestSkipped('Paddle vendor ID and auth code not configured.');
+            $this->markTestSkipped('Lnbits vendor ID and auth code not configured.');
         }
 
         $billable = $this->createBillable();

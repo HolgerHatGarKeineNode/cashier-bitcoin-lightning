@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Carbon\Carbon;
-use Laravel\Paddle\Cashier;
-use Laravel\Paddle\Subscription;
+use Bitcoin\Lightning\Lnbits\Cashier;
+use Bitcoin\Lightning\Lnbits\Subscription;
 use LogicException;
 
 class SubscriptionsTest extends FeatureTestCase

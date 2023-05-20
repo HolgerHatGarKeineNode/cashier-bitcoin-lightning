@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use Laravel\Paddle\CashierServiceProvider;
+use Bitcoin\Lightning\Lnbits\CashierServiceProvider;
 use Orchestra\Testbench\TestCase;
 use Tests\Fixtures\User;
 

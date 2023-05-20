@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use Laravel\Paddle\Cashier;
-use Laravel\Paddle\Events\PaymentSucceeded;
-use Laravel\Paddle\Events\SubscriptionCancelled;
-use Laravel\Paddle\Events\SubscriptionCreated;
-use Laravel\Paddle\Events\SubscriptionPaymentSucceeded;
-use Laravel\Paddle\Events\SubscriptionUpdated;
-use Laravel\Paddle\Subscription;
+use Bitcoin\Lightning\Lnbits\Cashier;
+use Bitcoin\Lightning\Lnbits\Events\PaymentSucceeded;
+use Bitcoin\Lightning\Lnbits\Events\SubscriptionCancelled;
+use Bitcoin\Lightning\Lnbits\Events\SubscriptionCreated;
+use Bitcoin\Lightning\Lnbits\Events\SubscriptionPaymentSucceeded;
+use Bitcoin\Lightning\Lnbits\Events\SubscriptionUpdated;
+use Bitcoin\Lightning\Lnbits\Subscription;
 
 class WebhooksTest extends FeatureTestCase
 {

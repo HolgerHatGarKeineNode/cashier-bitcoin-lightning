@@ -4,9 +4,9 @@ namespace Tests\Unit;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
-use Laravel\Paddle\Cashier;
-use Laravel\Paddle\CashierFake;
-use Laravel\Paddle\Exceptions\PaddleException;
+use Bitcoin\Lightning\Lnbits\Cashier;
+use Bitcoin\Lightning\Lnbits\CashierFake;
+use Bitcoin\Lightning\Lnbits\Exceptions\LnbitsException;
 use Tests\Feature\FeatureTestCase;
 
 class CashierFakeTest extends FeatureTestCase
@@ -38,7 +38,7 @@ class CashierFakeTest extends FeatureTestCase
 
     public function test_a_user_may_use_the_error_method_to_error_an_endpoint()
     {
-        $this->expectException(PaddleException::class);
+        $this->expectException(LnbitsException::class);
         Cashier::fake()->error('payment/refund');
 
         $this->createBillable()->refund(4321, 12.50, 'Incorrect order');
