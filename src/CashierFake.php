@@ -1,17 +1,17 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits;
+namespace Cashier\BtcPayServer;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use Bitcoin\Lightning\Lnbits\Events\PaymentSucceeded;
-use Bitcoin\Lightning\Lnbits\Events\SubscriptionCancelled;
-use Bitcoin\Lightning\Lnbits\Events\SubscriptionCreated;
-use Bitcoin\Lightning\Lnbits\Events\SubscriptionPaymentFailed;
-use Bitcoin\Lightning\Lnbits\Events\SubscriptionPaymentSucceeded;
-use Bitcoin\Lightning\Lnbits\Events\SubscriptionUpdated;
+use Cashier\BtcPayServer\Events\PaymentSucceeded;
+use Cashier\BtcPayServer\Events\SubscriptionCancelled;
+use Cashier\BtcPayServer\Events\SubscriptionCreated;
+use Cashier\BtcPayServer\Events\SubscriptionPaymentFailed;
+use Cashier\BtcPayServer\Events\SubscriptionPaymentSucceeded;
+use Cashier\BtcPayServer\Events\SubscriptionUpdated;
 
 class CashierFake
 {
@@ -96,7 +96,7 @@ class CashierFake
      * @param  int  $code
      * @return self
      *
-     * @see https://developer.paddle.com/api-reference/ZG9jOjI1MzUzOTkw-api-error-codes
+     * @see https://developer.btcpay.com/api-reference/ZG9jOjI1MzUzOTkw-api-error-codes
      */
     public function error(string $endpoint, $message = '', $code = 0)
     {

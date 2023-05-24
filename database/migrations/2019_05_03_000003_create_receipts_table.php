@@ -15,7 +15,7 @@ class CreateReceiptsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('billable_id');
             $table->string('billable_type');
-            $table->unsignedBigInteger('paddle_subscription_id')->nullable()->index();
+            $table->unsignedBigInteger('btcpay_subscription_id')->nullable()->index();
             $table->string('checkout_id');
             $table->string('order_id')->unique();
             $table->string('amount');

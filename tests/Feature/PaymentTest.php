@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use Bitcoin\Lightning\Lnbits\Payment;
+use Cashier\BtcPayServer\Payment;
 use Money\Currency;
 
 class PaymentTest extends FeatureTestCase

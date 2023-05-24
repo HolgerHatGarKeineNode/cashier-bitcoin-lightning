@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use Bitcoin\Lightning\Lnbits\Receipt;
+use Cashier\BtcPayServer\Receipt;
 use Money\Currency;
 
 class ReceiptsTest extends FeatureTestCase

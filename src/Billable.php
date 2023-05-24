@@ -1,11 +1,11 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits;
+namespace Cashier\BtcPayServer;
 
-use Bitcoin\Lightning\Lnbits\Concerns\ManagesCustomer;
-use Bitcoin\Lightning\Lnbits\Concerns\ManagesReceipts;
-use Bitcoin\Lightning\Lnbits\Concerns\ManagesSubscriptions;
-use Bitcoin\Lightning\Lnbits\Concerns\PerformsCharges;
+use Cashier\BtcPayServer\Concerns\ManagesCustomer;
+use Cashier\BtcPayServer\Concerns\ManagesReceipts;
+use Cashier\BtcPayServer\Concerns\ManagesSubscriptions;
+use Cashier\BtcPayServer\Concerns\PerformsCharges;
 
 trait Billable
 {
@@ -20,8 +20,8 @@ trait Billable
      * @param  array  $options
      * @return array
      */
-    public function paddleOptions(array $options = [])
+    public function btcpayOptions(array $options = [])
     {
-        return Cashier::paddleOptions($options);
+        return Cashier::btcpayOptions($options);
     }
 }

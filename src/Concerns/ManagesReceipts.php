@@ -1,8 +1,8 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits\Concerns;
+namespace Cashier\BtcPayServer\Concerns;
 
-use Bitcoin\Lightning\Lnbits\Cashier;
+use Cashier\BtcPayServer\Cashier;
 
 trait ManagesReceipts
 {

@@ -16,9 +16,9 @@ class CreateSubscriptionsTable extends Migration
             $table->unsignedBigInteger('billable_id');
             $table->string('billable_type');
             $table->string('name');
-            $table->integer('paddle_id')->unique();
-            $table->string('paddle_status');
-            $table->integer('paddle_plan');
+            $table->integer('btcpay_id')->unique();
+            $table->string('btcpay_status');
+            $table->integer('btcpay_plan');
             $table->integer('quantity');
             $table->timestamp('trial_ends_at')->nullable();
             $table->timestamp('paused_from')->nullable();

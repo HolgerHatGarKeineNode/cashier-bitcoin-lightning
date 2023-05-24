@@ -1,16 +1,16 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits;
+namespace Cashier\BtcPayServer;
 
 use Carbon\Carbon;
 use DateTimeInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Bitcoin\Lightning\Lnbits\Concerns\Prorates;
+use Cashier\BtcPayServer\Concerns\Prorates;
 use LogicException;
 
 /**
- * @property \Bitcoin\Lightning\Lnbits\Billable $billable
+ * @property \Cashier\BtcPayServer\Billable $billable
  */
 class Subscription extends Model
 {
@@ -35,8 +35,8 @@ class Subscription extends Model
      * @var array
      */
     protected $casts = [
-        'paddle_id' => 'integer',
-        'paddle_plan' => 'integer',
+        'btcpay_id' => 'integer',
+        'btcpay_plan' => 'integer',
         'quantity' => 'integer',
         'trial_ends_at' => 'datetime',
         'paused_from' => 'datetime',
@@ -48,7 +48,7 @@ class Subscription extends Model
      *
      * @var array
      */
-    protected $paddleInfo;
+    protected $btcpayInfo;
 
     /**
      * Get the billable model related to the subscription.
@@ -67,7 +67,7 @@ class Subscription extends Model
      */
     public function receipts()
     {
-        return $this->hasMany(Cashier::$receiptModel, 'paddle_subscription_id', 'paddle_id')->orderByDesc('created_at');
+        return $this->hasMany(Cashier::$receiptModel, 'btcpay_subscription_id', 'btcpay_id')->orderByDesc('created_at');
     }
 
     /**
@@ -78,7 +78,7 @@ class Subscription extends Model
      */
     public function hasPlan($plan)
     {
-        return $this->paddle_plan == $plan;
+        return $this->btcpay_plan == $plan;
     }
 
     /**
@@ -99,8 +99,8 @@ class Subscription extends Model
     public function active()
     {
         return (is_null($this->ends_at) || $this->onGracePeriod() || $this->onPausedGracePeriod()) &&
-            (! Cashier::$deactivatePastDue || $this->paddle_status !== self::STATUS_PAST_DUE) &&
-            $this->paddle_status !== self::STATUS_PAUSED;
+            (! Cashier::$deactivatePastDue || $this->btcpay_status !== self::STATUS_PAST_DUE) &&
+            $this->btcpay_status !== self::STATUS_PAUSED;
     }
 
     /**
@@ -119,10 +119,10 @@ class Subscription extends Model
                 ->orWhere(function ($query) {
                     $query->onPausedGracePeriod();
                 });
-        })->where('paddle_status', '!=', self::STATUS_PAUSED);
+        })->where('btcpay_status', '!=', self::STATUS_PAUSED);
 
         if (Cashier::$deactivatePastDue) {
-            $query->where('paddle_status', '!=', self::STATUS_PAST_DUE);
+            $query->where('btcpay_status', '!=', self::STATUS_PAST_DUE);
         }
     }
 
@@ -133,7 +133,7 @@ class Subscription extends Model
      */
     public function pastDue()
     {
-        return $this->paddle_status === self::STATUS_PAST_DUE;
+        return $this->btcpay_status === self::STATUS_PAST_DUE;
     }
 
     /**
@@ -144,7 +144,7 @@ class Subscription extends Model
      */
     public function scopePastDue($query)
     {
-        $query->where('paddle_status', self::STATUS_PAST_DUE);
+        $query->where('btcpay_status', self::STATUS_PAST_DUE);
     }
 
     /**
@@ -175,7 +175,7 @@ class Subscription extends Model
      */
     public function paused()
     {
-        return $this->paddle_status === self::STATUS_PAUSED;
+        return $this->btcpay_status === self::STATUS_PAUSED;
     }
 
     /**
@@ -186,7 +186,7 @@ class Subscription extends Model
      */
     public function scopePaused($query)
     {
-        $query->where('paddle_status', self::STATUS_PAUSED);
+        $query->where('btcpay_status', self::STATUS_PAUSED);
     }
 
     /**
@@ -197,7 +197,7 @@ class Subscription extends Model
      */
     public function scopeNotPaused($query)
     {
-        $query->where('paddle_status', '!=', self::STATUS_PAUSED);
+        $query->where('btcpay_status', '!=', self::STATUS_PAUSED);
     }
 
     /**
@@ -385,14 +385,14 @@ class Subscription extends Model
             throw new Exception('Charge name has a maximum length of 50 characters.');
         }
 
-        $payload = $this->billable->paddleOptions([
+        $payload = $this->billable->btcpayOptions([
             'amount' => $amount,
             'charge_name' => $name,
         ]);
 
-        $this->paddleInfo = null;
+        $this->btcpayInfo = null;
 
-        return Cashier::post("/subscription/{$this->paddle_id}/charge", $payload)['response'];
+        return Cashier::post("/subscription/{$this->btcpay_id}/charge", $payload)['response'];
     }
 
     /**
@@ -458,7 +458,7 @@ class Subscription extends Model
             'quantity' => $quantity,
         ])->save();
 
-        $this->paddleInfo = null;
+        $this->btcpayInfo = null;
 
         return $this;
     }
@@ -480,10 +480,10 @@ class Subscription extends Model
         ]));
 
         $this->forceFill([
-            'paddle_plan' => $plan,
+            'btcpay_plan' => $plan,
         ])->save();
 
-        $this->paddleInfo = null;
+        $this->btcpayInfo = null;
 
         return $this;
     }
@@ -513,14 +513,14 @@ class Subscription extends Model
             'pause' => true,
         ]);
 
-        $info = $this->paddleInfo();
+        $info = $this->btcpayInfo();
 
         $this->forceFill([
-            'paddle_status' => $info['state'],
+            'btcpay_status' => $info['state'],
             'paused_from' => Carbon::createFromFormat('Y-m-d H:i:s', $info['paused_from'], 'UTC'),
         ])->save();
 
-        $this->paddleInfo = null;
+        $this->btcpayInfo = null;
 
         return $this;
     }
@@ -537,12 +537,12 @@ class Subscription extends Model
         ]);
 
         $this->forceFill([
-            'paddle_status' => self::STATUS_ACTIVE,
+            'btcpay_status' => self::STATUS_ACTIVE,
             'ends_at' => null,
             'paused_from' => null,
         ])->save();
 
-        $this->paddleInfo = null;
+        $this->btcpayInfo = null;
 
         return $this;
     }
@@ -555,13 +555,13 @@ class Subscription extends Model
      */
     public function updateLnbitsSubscription(array $options)
     {
-        $payload = $this->billable->paddleOptions(array_merge([
-            'subscription_id' => $this->paddle_id,
+        $payload = $this->billable->btcpayOptions(array_merge([
+            'subscription_id' => $this->btcpay_id,
         ], $options));
 
         $response = Cashier::post('/subscription/users/update', $payload)['response'];
 
-        $this->paddleInfo = null;
+        $this->btcpayInfo = null;
 
         return $response;
     }
@@ -573,14 +573,14 @@ class Subscription extends Model
      */
     public function updateUrl()
     {
-        return $this->paddleInfo()['update_url'];
+        return $this->btcpayInfo()['update_url'];
     }
 
     /**
      * Begin creating a new modifier.
      *
      * @param  float  $amount
-     * @return \Bitcoin\Lightning\Lnbits\ModifierBuilder
+     * @return \Cashier\BtcPayServer\ModifierBuilder
      */
     public function newModifier($amount)
     {
@@ -595,8 +595,8 @@ class Subscription extends Model
     public function modifiers()
     {
         $result = Cashier::post('/subscription/modifiers', array_merge([
-            'subscription_id' => $this->paddle_id,
-        ], $this->billable->paddleOptions()));
+            'subscription_id' => $this->btcpay_id,
+        ], $this->billable->btcpayOptions()));
 
         return collect($result['response'])->map(function (array $modifier) {
             return new Modifier($this, $modifier);
@@ -607,7 +607,7 @@ class Subscription extends Model
      * Get a modifier instance by ID.
      *
      * @param  int  $id
-     * @return \Bitcoin\Lightning\Lnbits\Modifier|null
+     * @return \Cashier\BtcPayServer\Modifier|null
      */
     public function modifier($id)
     {
@@ -658,18 +658,18 @@ class Subscription extends Model
      */
     public function cancelAt(DateTimeInterface $endsAt)
     {
-        $payload = $this->billable->paddleOptions([
-            'subscription_id' => $this->paddle_id,
+        $payload = $this->billable->btcpayOptions([
+            'subscription_id' => $this->btcpay_id,
         ]);
 
         Cashier::post('/subscription/users_cancel', $payload);
 
         $this->forceFill([
-            'paddle_status' => self::STATUS_DELETED,
+            'btcpay_status' => self::STATUS_DELETED,
             'ends_at' => $endsAt,
         ])->save();
 
-        $this->paddleInfo = null;
+        $this->btcpayInfo = null;
 
         return $this;
     }
@@ -681,17 +681,17 @@ class Subscription extends Model
      */
     public function cancelUrl()
     {
-        return $this->paddleInfo()['cancel_url'];
+        return $this->btcpayInfo()['cancel_url'];
     }
 
     /**
      * Get the last payment for the subscription.
      *
-     * @return \Bitcoin\Lightning\Lnbits\Payment
+     * @return \Cashier\BtcPayServer\Payment
      */
     public function lastPayment()
     {
-        $payment = $this->paddleInfo()['last_payment'];
+        $payment = $this->btcpayInfo()['last_payment'];
 
         return new Payment($payment['amount'], $payment['currency'], $payment['date']);
     }
@@ -699,15 +699,15 @@ class Subscription extends Model
     /**
      * Get the next payment for the subscription.
      *
-     * @return \Bitcoin\Lightning\Lnbits\Payment|null
+     * @return \Cashier\BtcPayServer\Payment|null
      */
     public function nextPayment()
     {
-        if (! isset($this->paddleInfo()['next_payment'])) {
+        if (! isset($this->btcpayInfo()['next_payment'])) {
             return;
         }
 
-        $payment = $this->paddleInfo()['next_payment'];
+        $payment = $this->btcpayInfo()['next_payment'];
 
         return new Payment($payment['amount'], $payment['currency'], $payment['date']);
     }
@@ -717,9 +717,9 @@ class Subscription extends Model
      *
      * @return string
      */
-    public function paddleEmail()
+    public function btcpayEmail()
     {
-        return (string) $this->paddleInfo()['user_email'];
+        return (string) $this->btcpayInfo()['user_email'];
     }
 
     /**
@@ -729,7 +729,7 @@ class Subscription extends Model
      */
     public function paymentMethod()
     {
-        return (string) ($this->paddleInfo()['payment_information']['payment_method'] ?? '');
+        return (string) ($this->btcpayInfo()['payment_information']['payment_method'] ?? '');
     }
 
     /**
@@ -739,7 +739,7 @@ class Subscription extends Model
      */
     public function cardBrand()
     {
-        return (string) ($this->paddleInfo()['payment_information']['card_type'] ?? '');
+        return (string) ($this->btcpayInfo()['payment_information']['card_type'] ?? '');
     }
 
     /**
@@ -749,7 +749,7 @@ class Subscription extends Model
      */
     public function cardLastFour()
     {
-        return (string) ($this->paddleInfo()['payment_information']['last_four_digits'] ?? '');
+        return (string) ($this->btcpayInfo()['payment_information']['last_four_digits'] ?? '');
     }
 
     /**
@@ -759,7 +759,7 @@ class Subscription extends Model
      */
     public function cardExpirationDate()
     {
-        return (string) ($this->paddleInfo()['payment_information']['expiry_date'] ?? '');
+        return (string) ($this->btcpayInfo()['payment_information']['expiry_date'] ?? '');
     }
 
     /**
@@ -767,15 +767,15 @@ class Subscription extends Model
      *
      * @return array
      */
-    public function paddleInfo()
+    public function btcpayInfo()
     {
-        if ($this->paddleInfo) {
-            return $this->paddleInfo;
+        if ($this->btcpayInfo) {
+            return $this->btcpayInfo;
         }
 
-        return $this->paddleInfo = Cashier::post('/subscription/users', array_merge([
-            'subscription_id' => $this->paddle_id,
-        ], $this->billable->paddleOptions()))['response'][0];
+        return $this->btcpayInfo = Cashier::post('/subscription/users', array_merge([
+            'subscription_id' => $this->btcpay_id,
+        ], $this->billable->btcpayOptions()))['response'][0];
     }
 
     /**

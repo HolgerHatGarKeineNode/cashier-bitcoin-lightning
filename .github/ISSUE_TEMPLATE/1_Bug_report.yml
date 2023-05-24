@@ -6,8 +6,8 @@ body:
       value: "Before submitting your report, [please ensure your Laravel version is still supported](https://laravel.com/docs/releases#support-policy)."
   - type: input
     attributes:
-      label: Cashier Bitcoin Lightning Version
-      description: Provide the Cashier Bitcoin Lightning version that you are using.
+      label: Cashier BTCPay Server Version
+      description: Provide the Cashier BTCPay Server version that you are using.
       placeholder: 1.6.1
     validations:
       required: true

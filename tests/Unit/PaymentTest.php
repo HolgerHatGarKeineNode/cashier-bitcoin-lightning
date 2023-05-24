@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Carbon\Carbon;
-use Bitcoin\Lightning\Lnbits\Payment;
+use Cashier\BtcPayServer\Payment;
 use PHPUnit\Framework\TestCase;
 
 class PaymentTest extends TestCase

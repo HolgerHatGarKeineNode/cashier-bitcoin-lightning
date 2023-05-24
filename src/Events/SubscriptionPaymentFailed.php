@@ -1,6 +1,6 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits\Events;
+namespace Cashier\BtcPayServer\Events;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;

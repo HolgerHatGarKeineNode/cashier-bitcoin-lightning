@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use Illuminate\Support\Facades\Http;
-use Bitcoin\Lightning\Lnbits\Cashier;
-use Bitcoin\Lightning\Lnbits\Modifier;
-use Bitcoin\Lightning\Lnbits\Subscription;
+use Cashier\BtcPayServer\Cashier;
+use Cashier\BtcPayServer\Modifier;
+use Cashier\BtcPayServer\Subscription;
 use Money\Currency;
 
 class ModifiersTest extends FeatureTestCase
@@ -25,15 +25,15 @@ class ModifiersTest extends FeatureTestCase
 
         $subscription = $billable->subscriptions()->create([
             'name' => 'main',
-            'paddle_id' => 3423423,
-            'paddle_plan' => 12345,
-            'paddle_status' => Subscription::STATUS_ACTIVE,
+            'btcpay_id' => 3423423,
+            'btcpay_plan' => 12345,
+            'btcpay_status' => Subscription::STATUS_ACTIVE,
             'quantity' => 1,
         ]);
 
         $modifier = $subscription->modifiers()->first();
         $this->assertEquals($modifier->id(), 6789);
-        $this->assertEquals($modifier->subscription()->paddle_id, $subscription->paddle_id);
+        $this->assertEquals($modifier->subscription()->btcpay_id, $subscription->btcpay_id);
         $this->assertEquals($modifier->amount(), '€15.00');
         $this->assertEquals($modifier->rawAmount(), 15.00);
         $this->assertInstanceOf(Currency::class, $modifier->currency());
@@ -43,7 +43,7 @@ class ModifiersTest extends FeatureTestCase
 
         $modifier = $subscription->modifier(6789);
         $this->assertEquals($modifier->id(), 6789);
-        $this->assertEquals($modifier->subscription()->paddle_id, $subscription->paddle_id);
+        $this->assertEquals($modifier->subscription()->btcpay_id, $subscription->btcpay_id);
         $this->assertEquals($modifier->amount(), '€15.00');
         $this->assertEquals($modifier->rawAmount(), 15.00);
         $this->assertInstanceOf(Currency::class, $modifier->currency());
@@ -71,20 +71,20 @@ class ModifiersTest extends FeatureTestCase
 
         $subscription = $billable->subscriptions()->create([
             'name' => 'main',
-            'paddle_id' => 3423423,
-            'paddle_plan' => 12345,
-            'paddle_status' => Subscription::STATUS_ACTIVE,
+            'btcpay_id' => 3423423,
+            'btcpay_plan' => 12345,
+            'btcpay_status' => Subscription::STATUS_ACTIVE,
             'quantity' => 1,
         ]);
 
-        /** @var \Bitcoin\Lightning\Lnbits\Modifier $modifier */
+        /** @var \Cashier\BtcPayServer\Modifier $modifier */
         $modifier = $subscription->newModifier(15.00)
             ->description('Our test description')
             ->oneTime()
             ->create();
 
         $this->assertEquals($modifier->id(), 6789);
-        $this->assertEquals($modifier->subscription()->paddle_id, $subscription->paddle_id);
+        $this->assertEquals($modifier->subscription()->btcpay_id, $subscription->btcpay_id);
         $this->assertEquals($modifier->amount(), '€15.00');
         $this->assertEquals($modifier->rawAmount(), 15.00);
         $this->assertInstanceOf(Currency::class, $modifier->currency());
@@ -93,7 +93,7 @@ class ModifiersTest extends FeatureTestCase
         $this->assertEquals($modifier->recurring(), false);
 
         Http::assertSent(function ($request) {
-            if ($request->url() === 'https://vendors.paddle.com/api/2.0/subscription/modifiers/create') {
+            if ($request->url() === 'https://vendors.btcpay.com/api/2.0/subscription/modifiers/create') {
                 return $request['subscription_id'] == 3423423 &&
                    $request['modifier_amount'] == 15.00 &&
                    $request['modifier_description'] == 'Our test description' &&
@@ -112,9 +112,9 @@ class ModifiersTest extends FeatureTestCase
 
         $subscription = $billable->subscriptions()->create([
             'name' => 'main',
-            'paddle_id' => 3423423,
-            'paddle_plan' => 12345,
-            'paddle_status' => Subscription::STATUS_ACTIVE,
+            'btcpay_id' => 3423423,
+            'btcpay_plan' => 12345,
+            'btcpay_status' => Subscription::STATUS_ACTIVE,
             'quantity' => 1,
         ]);
 

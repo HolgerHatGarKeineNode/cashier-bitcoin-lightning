@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Bitcoin\Lightning\Lnbits\Cashier;
+use Cashier\BtcPayServer\Cashier;
 use Tests\TestCase;
 
 class CashierTest extends TestCase

@@ -2,9 +2,9 @@
 
 The Laravel contributing guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Running Cashier Bitcoin Lightning's Tests
+## Running Cashier BTCPay Server's Tests
 
-You will need to set some environment variables in a custom `phpunit.xml` file in order to run the Cashier Bitcoin Lightning tests.
+You will need to set some environment variables in a custom `phpunit.xml` file in order to run the Cashier BTCPay Server tests.
 
 Copy the default file using `cp phpunit.xml.dist phpunit.xml` and add the following lines below the `DB_CONNECTION` environment variable in your new `phpunit.xml` file:
 

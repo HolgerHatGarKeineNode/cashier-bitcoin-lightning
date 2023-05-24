@@ -1,9 +1,9 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits\Concerns;
+namespace Cashier\BtcPayServer\Concerns;
 
 use InvalidArgumentException;
-use Bitcoin\Lightning\Lnbits\Cashier;
+use Cashier\BtcPayServer\Cashier;
 use LogicException;
 
 trait PerformsCharges
@@ -28,7 +28,7 @@ trait PerformsCharges
             'title' => $title,
             'webhook_url' => Cashier::webhookUrl(),
             'prices' => is_array($amount) ? $amount : [config('cashier.currency').':'.$amount],
-        ], $options, $this->paddleOptions()));
+        ], $options, $this->btcpayOptions()));
     }
 
     /**
@@ -42,7 +42,7 @@ trait PerformsCharges
     {
         return $this->generatePayLink(array_merge([
             'product_id' => $productId,
-        ], $options, $this->paddleOptions()));
+        ], $options, $this->btcpayOptions()));
     }
 
     /**
@@ -53,9 +53,9 @@ trait PerformsCharges
      */
     protected function generatePayLink(array $payload)
     {
-        $payload['customer_email'] = $payload['customer_email'] ?? (string) $this->paddleEmail();
-        $payload['customer_country'] = $payload['customer_country'] ?? (string) $this->paddleCountry();
-        $payload['customer_postcode'] = $payload['customer_postcode'] ?? (string) $this->paddlePostcode();
+        $payload['customer_email'] = $payload['customer_email'] ?? (string) $this->btcpayEmail();
+        $payload['customer_country'] = $payload['customer_country'] ?? (string) $this->btcpayCountry();
+        $payload['customer_postcode'] = $payload['customer_postcode'] ?? (string) $this->btcpayPostcode();
 
         // We'll need a way to identify the user in any webhook we're catching so before
         // we make the API request we'll attach the authentication identifier to this
@@ -93,7 +93,7 @@ trait PerformsCharges
         $payload = array_merge([
             'order_id' => $orderId,
             'reason' => $reason,
-        ], $this->paddleOptions());
+        ], $this->btcpayOptions());
 
         if ($amount) {
             $payload['amount'] = $amount;

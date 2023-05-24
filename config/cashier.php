@@ -38,7 +38,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This is the base URI where webhooks from Lnbits will be sent. The URL
-    | built into Cashier Bitcoin Lightning is used by default; however, you can add
+    | built into Cashier BTCPay Server is used by default; however, you can add
     | a custom URL when required for any application testing purposes.
     |
     */

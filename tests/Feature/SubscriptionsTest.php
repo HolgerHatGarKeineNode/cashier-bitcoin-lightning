@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use Carbon\Carbon;
-use Bitcoin\Lightning\Lnbits\Cashier;
-use Bitcoin\Lightning\Lnbits\Subscription;
+use Cashier\BtcPayServer\Cashier;
+use Cashier\BtcPayServer\Subscription;
 use LogicException;
 
 class SubscriptionsTest extends FeatureTestCase
@@ -24,9 +24,9 @@ class SubscriptionsTest extends FeatureTestCase
 
         $subscription = $billable->subscriptions()->create([
             'name' => 'main',
-            'paddle_id' => 244,
-            'paddle_plan' => 2323,
-            'paddle_status' => Subscription::STATUS_ACTIVE,
+            'btcpay_id' => 244,
+            'btcpay_plan' => 2323,
+            'btcpay_status' => Subscription::STATUS_ACTIVE,
             'quantity' => 1,
         ]);
 
@@ -65,9 +65,9 @@ class SubscriptionsTest extends FeatureTestCase
 
         $subscription = $billable->subscriptions()->create([
             'name' => 'main',
-            'paddle_id' => 244,
-            'paddle_plan' => 2323,
-            'paddle_status' => Subscription::STATUS_TRIALING,
+            'btcpay_id' => 244,
+            'btcpay_plan' => 2323,
+            'btcpay_status' => Subscription::STATUS_TRIALING,
             'quantity' => 1,
             'trial_ends_at' => Carbon::tomorrow(),
         ]);
@@ -100,9 +100,9 @@ class SubscriptionsTest extends FeatureTestCase
 
         $subscription = $billable->subscriptions()->create([
             'name' => 'main',
-            'paddle_id' => 244,
-            'paddle_plan' => 2323,
-            'paddle_status' => Subscription::STATUS_DELETED,
+            'btcpay_id' => 244,
+            'btcpay_plan' => 2323,
+            'btcpay_status' => Subscription::STATUS_DELETED,
             'quantity' => 1,
             'ends_at' => Carbon::tomorrow(),
         ]);
@@ -123,9 +123,9 @@ class SubscriptionsTest extends FeatureTestCase
 
         $subscription = $billable->subscriptions()->create([
             'name' => 'main',
-            'paddle_id' => 244,
-            'paddle_plan' => 2323,
-            'paddle_status' => Subscription::STATUS_DELETED,
+            'btcpay_id' => 244,
+            'btcpay_plan' => 2323,
+            'btcpay_status' => Subscription::STATUS_DELETED,
             'quantity' => 1,
             'ends_at' => Carbon::yesterday(),
         ]);
@@ -146,9 +146,9 @@ class SubscriptionsTest extends FeatureTestCase
 
         $subscription = $billable->subscriptions()->create([
             'name' => 'main',
-            'paddle_id' => 244,
-            'paddle_plan' => 2323,
-            'paddle_status' => Subscription::STATUS_PAUSED,
+            'btcpay_id' => 244,
+            'btcpay_plan' => 2323,
+            'btcpay_status' => Subscription::STATUS_PAUSED,
             'quantity' => 1,
         ]);
 
@@ -168,9 +168,9 @@ class SubscriptionsTest extends FeatureTestCase
 
         $subscription = $billable->subscriptions()->create([
             'name' => 'main',
-            'paddle_id' => 244,
-            'paddle_plan' => 2323,
-            'paddle_status' => Subscription::STATUS_ACTIVE,
+            'btcpay_id' => 244,
+            'btcpay_plan' => 2323,
+            'btcpay_status' => Subscription::STATUS_ACTIVE,
             'quantity' => 1,
             'paused_from' => Carbon::tomorrow(),
         ]);
@@ -202,13 +202,13 @@ class SubscriptionsTest extends FeatureTestCase
 
         $subscription = $billable->subscriptions()->create([
             'name' => 'main',
-            'paddle_id' => 23423,
-            'paddle_plan' => 12345,
-            'paddle_status' => Subscription::STATUS_ACTIVE,
+            'btcpay_id' => 23423,
+            'btcpay_plan' => 12345,
+            'btcpay_status' => Subscription::STATUS_ACTIVE,
             'quantity' => 1,
         ]);
 
-        $this->assertSame('john@example.com', $subscription->paddleEmail());
+        $this->assertSame('john@example.com', $subscription->btcpayEmail());
         $this->assertSame('card', $subscription->paymentMethod());
         $this->assertSame('visa', $subscription->cardBrand());
         $this->assertSame('1234', $subscription->cardLastFour());
@@ -229,13 +229,13 @@ class SubscriptionsTest extends FeatureTestCase
 
         $subscription = $billable->subscriptions()->create([
             'name' => 'main',
-            'paddle_id' => 23423,
-            'paddle_plan' => 12345,
-            'paddle_status' => Subscription::STATUS_ACTIVE,
+            'btcpay_id' => 23423,
+            'btcpay_plan' => 12345,
+            'btcpay_status' => Subscription::STATUS_ACTIVE,
             'quantity' => 1,
         ]);
 
-        $this->assertSame('john@example.com', $subscription->paddleEmail());
+        $this->assertSame('john@example.com', $subscription->btcpayEmail());
         $this->assertSame('paypal', $subscription->paymentMethod());
         $this->assertSame('', $subscription->cardBrand());
         $this->assertSame('', $subscription->cardLastFour());

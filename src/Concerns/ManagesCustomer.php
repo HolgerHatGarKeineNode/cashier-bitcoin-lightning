@@ -1,8 +1,8 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits\Concerns;
+namespace Cashier\BtcPayServer\Concerns;
 
-use Bitcoin\Lightning\Lnbits\Cashier;
+use Cashier\BtcPayServer\Cashier;
 
 trait ManagesCustomer
 {
@@ -10,7 +10,7 @@ trait ManagesCustomer
      * Create a customer record for the billable model.
      *
      * @param  array  $attributes
-     * @return \Bitcoin\Lightning\Lnbits\Customer
+     * @return \Cashier\BtcPayServer\Customer
      */
     public function createAsCustomer(array $attributes = [])
     {
@@ -37,7 +37,7 @@ trait ManagesCustomer
     public function productPrices($products, array $options = [])
     {
         $options = array_merge([
-            'customer_country' => $this->paddleCountry(),
+            'customer_country' => $this->btcpayCountry(),
         ], $options);
 
         return Cashier::productPrices($products, $options);
@@ -48,7 +48,7 @@ trait ManagesCustomer
      *
      * @return string|null
      */
-    public function paddleEmail()
+    public function btcpayEmail()
     {
         return $this->email;
     }
@@ -60,9 +60,9 @@ trait ManagesCustomer
      *
      * @return string|null
      *
-     * @link https://developer.paddle.com/reference/platform-parameters/supported-countries
+     * @link https://developer.btcpay.com/reference/platform-parameters/supported-countries
      */
-    public function paddleCountry()
+    public function btcpayCountry()
     {
         //
     }
@@ -74,9 +74,9 @@ trait ManagesCustomer
      *
      * @return string|null
      *
-     * @link https://developer.paddle.com/reference/platform-parameters/supported-countries#countries-requiring-postcode
+     * @link https://developer.btcpay.com/reference/platform-parameters/supported-countries#countries-requiring-postcode
      */
-    public function paddlePostcode()
+    public function btcpayPostcode()
     {
         //
     }

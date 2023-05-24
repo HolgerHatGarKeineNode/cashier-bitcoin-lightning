@@ -1,6 +1,6 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits;
+namespace Cashier\BtcPayServer;
 
 use Spatie\Url\Url;
 
@@ -9,7 +9,7 @@ class SubscriptionBuilder
     /**
      * The Billable model that is subscribing.
      *
-     * @var \Bitcoin\Lightning\Lnbits\Billable
+     * @var \Cashier\BtcPayServer\Billable
      */
     protected $billable;
 
@@ -72,7 +72,7 @@ class SubscriptionBuilder
     /**
      * Create a new subscription builder instance.
      *
-     * @param  \Bitcoin\Lightning\Lnbits\Billable  $billable
+     * @param  \Cashier\BtcPayServer\Billable  $billable
      * @param  string  $name
      * @param  int  $plan
      * @return void
@@ -227,7 +227,7 @@ class SubscriptionBuilder
     protected function getPlanPricesForPayload($trialing = true)
     {
         $plan = Cashier::post(
-            '/subscription/plans', $this->billable->paddleOptions(['plan' => $this->plan])
+            '/subscription/plans', $this->billable->btcpayOptions(['plan' => $this->plan])
         )['response'][0];
 
         return collect($plan[$trialing ? 'initial_price' : 'recurring_price'])

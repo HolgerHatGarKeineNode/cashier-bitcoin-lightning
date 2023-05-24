@@ -1,6 +1,6 @@
 {
-    "name": "holgerhatgarkeinenode/cashier-bitcoin-lightning",
-    "description": "Cashier Bitcoin Lightning provides an expressive, fluent interface to Lnbits's subscription billing services.",
+    "name": "holgerhatgarkeinenode/cashier-btcpayserver",
+    "description": "Cashier BTCPay Server provides an expressive, fluent interface to BTCPay Server billing services.",
     "keywords": [
         "laravel",
         "bitcoin",
@@ -51,7 +51,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Bitcoin\\Lightning\\Lnbits\\": "src/"
+            "Cashier\\BtcPayServer\\": "src/"
         }
     },
     "autoload-dev": {
@@ -65,7 +65,7 @@
         },
         "laravel": {
             "providers": [
-                "Bitcoin\\Lightning\\Lnbits\\CashierServiceProvider"
+                "Cashier\\BtcPayServer\\CashierServiceProvider"
             ]
         }
     },

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Bitcoin\Lightning\Lnbits\Cashier;
-use Bitcoin\Lightning\Lnbits\ProductPrice;
+use Cashier\BtcPayServer\Cashier;
+use Cashier\BtcPayServer\ProductPrice;
 
 class PricesTest extends FeatureTestCase
 {

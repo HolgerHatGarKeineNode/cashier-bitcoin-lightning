@@ -1,23 +1,23 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits\Http\Controllers;
+namespace Cashier\BtcPayServer\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
-use Bitcoin\Lightning\Lnbits\Cashier;
-use Bitcoin\Lightning\Lnbits\Events\PaymentSucceeded;
-use Bitcoin\Lightning\Lnbits\Events\SubscriptionCancelled;
-use Bitcoin\Lightning\Lnbits\Events\SubscriptionCreated;
-use Bitcoin\Lightning\Lnbits\Events\SubscriptionPaymentFailed;
-use Bitcoin\Lightning\Lnbits\Events\SubscriptionPaymentSucceeded;
-use Bitcoin\Lightning\Lnbits\Events\SubscriptionUpdated;
-use Bitcoin\Lightning\Lnbits\Events\WebhookHandled;
-use Bitcoin\Lightning\Lnbits\Events\WebhookReceived;
-use Bitcoin\Lightning\Lnbits\Exceptions\InvalidPassthroughPayload;
-use Bitcoin\Lightning\Lnbits\Http\Middleware\VerifyWebhookSignature;
-use Bitcoin\Lightning\Lnbits\Subscription;
+use Cashier\BtcPayServer\Cashier;
+use Cashier\BtcPayServer\Events\PaymentSucceeded;
+use Cashier\BtcPayServer\Events\SubscriptionCancelled;
+use Cashier\BtcPayServer\Events\SubscriptionCreated;
+use Cashier\BtcPayServer\Events\SubscriptionPaymentFailed;
+use Cashier\BtcPayServer\Events\SubscriptionPaymentSucceeded;
+use Cashier\BtcPayServer\Events\SubscriptionUpdated;
+use Cashier\BtcPayServer\Events\WebhookHandled;
+use Cashier\BtcPayServer\Events\WebhookReceived;
+use Cashier\BtcPayServer\Exceptions\InvalidPassthroughPayload;
+use Cashier\BtcPayServer\Http\Middleware\VerifyWebhookSignature;
+use Cashier\BtcPayServer\Subscription;
 use Symfony\Component\HttpFoundation\Response;
 
 class WebhookController extends Controller
@@ -114,7 +114,7 @@ class WebhookController extends Controller
         }
 
         $receipt = $billable->receipts()->create([
-            'paddle_subscription_id' => $payload['subscription_id'],
+            'btcpay_subscription_id' => $payload['subscription_id'],
             'checkout_id' => $payload['checkout_id'],
             'order_id' => $payload['order_id'],
             'amount' => $payload['sale_gross'],
@@ -147,7 +147,7 @@ class WebhookController extends Controller
      * @param  array  $payload
      * @return void
      *
-     * @throws \Bitcoin\Lightning\Lnbits\Exceptions\InvalidPassthroughPayload
+     * @throws \Cashier\BtcPayServer\Exceptions\InvalidPassthroughPayload
      */
     protected function handleSubscriptionCreated(array $payload)
     {
@@ -165,9 +165,9 @@ class WebhookController extends Controller
 
         $subscription = $customer->subscriptions()->create([
             'name' => $passthrough['subscription_name'],
-            'paddle_id' => $payload['subscription_id'],
-            'paddle_plan' => $payload['subscription_plan_id'],
-            'paddle_status' => $payload['status'],
+            'btcpay_id' => $payload['subscription_id'],
+            'btcpay_plan' => $payload['subscription_plan_id'],
+            'btcpay_status' => $payload['status'],
             'quantity' => $payload['quantity'],
             'trial_ends_at' => $trialEndsAt,
         ]);
@@ -189,12 +189,12 @@ class WebhookController extends Controller
 
         // Plan...
         if (isset($payload['subscription_plan_id'])) {
-            $subscription->paddle_plan = $payload['subscription_plan_id'];
+            $subscription->btcpay_plan = $payload['subscription_plan_id'];
         }
 
         // Status...
         if (isset($payload['status'])) {
-            $subscription->paddle_status = $payload['status'];
+            $subscription->btcpay_status = $payload['status'];
         }
 
         // Quantity...
@@ -235,7 +235,7 @@ class WebhookController extends Controller
 
         // Status...
         if (isset($payload['status'])) {
-            $subscription->paddle_status = $payload['status'];
+            $subscription->btcpay_status = $payload['status'];
         }
 
         $subscription->paused_from = null;
@@ -249,9 +249,9 @@ class WebhookController extends Controller
      * Find or create a customer based on the passthrough values and return the billable model.
      *
      * @param  string  $passthrough
-     * @return \Bitcoin\Lightning\Lnbits\Billable
+     * @return \Cashier\BtcPayServer\Billable
      *
-     * @throws \Bitcoin\Lightning\Lnbits\Exceptions\InvalidPassthroughPayload
+     * @throws \Cashier\BtcPayServer\Exceptions\InvalidPassthroughPayload
      */
     protected function findOrCreateCustomer(string $passthrough)
     {
@@ -271,11 +271,11 @@ class WebhookController extends Controller
      * Find the first subscription matching a Lnbits subscription id.
      *
      * @param  string  $subscriptionId
-     * @return \Bitcoin\Lightning\Lnbits\Subscription|null
+     * @return \Cashier\BtcPayServer\Subscription|null
      */
     protected function findSubscription(string $subscriptionId)
     {
-        return Cashier::$subscriptionModel::firstWhere('paddle_id', $subscriptionId);
+        return Cashier::$subscriptionModel::firstWhere('btcpay_id', $subscriptionId);
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits;
+namespace Cashier\BtcPayServer;
 
 use InvalidArgumentException;
 
@@ -9,7 +9,7 @@ class ModifierBuilder
     /**
      * The Subscription model the modifier belongs to.
      *
-     * @var \Bitcoin\Lightning\Lnbits\Subscription
+     * @var \Cashier\BtcPayServer\Subscription
      */
     protected $subscription;
 
@@ -37,7 +37,7 @@ class ModifierBuilder
     /**
      * Create a new modifier builder instance.
      *
-     * @param  \Bitcoin\Lightning\Lnbits\Subscription  $subscription
+     * @param  \Cashier\BtcPayServer\Subscription  $subscription
      * @param  float  $amount
      * @return void
      */
@@ -75,7 +75,7 @@ class ModifierBuilder
     /**
      * Create the modifier.
      *
-     * @return \Bitcoin\Lightning\Lnbits\Modifier
+     * @return \Cashier\BtcPayServer\Modifier
      *
      * @throws \InvalidArgumentException
      */
@@ -103,8 +103,8 @@ class ModifierBuilder
      */
     protected function buildPayload()
     {
-        return $this->subscription->billable->paddleOptions([
-            'subscription_id' => $this->subscription->paddle_id,
+        return $this->subscription->billable->btcpayOptions([
+            'subscription_id' => $this->subscription->btcpay_id,
             'modifier_amount' => $this->amount,
             'modifier_description' => $this->description,
             'modifier_recurring' => $this->recurring,

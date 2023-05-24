@@ -3,7 +3,7 @@
 namespace Tests\Fixtures;
 
 use Illuminate\Foundation\Auth\User as Model;
-use Bitcoin\Lightning\Lnbits\Billable;
+use Cashier\BtcPayServer\Billable;
 
 class User extends Model
 {

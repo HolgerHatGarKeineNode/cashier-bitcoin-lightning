@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use Bitcoin\Lightning\Lnbits\Cashier;
+use Cashier\BtcPayServer\Cashier;
 
 class ChargesTest extends FeatureTestCase
 {

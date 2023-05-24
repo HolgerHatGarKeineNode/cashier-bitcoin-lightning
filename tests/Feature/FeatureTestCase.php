@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use Bitcoin\Lightning\Lnbits\CashierServiceProvider;
+use Cashier\BtcPayServer\CashierServiceProvider;
 use Orchestra\Testbench\TestCase;
 use Tests\Fixtures\User;
 
@@ -29,7 +29,7 @@ abstract class FeatureTestCase extends TestCase
     protected function createUser($description = 'taylor', array $options = []): User
     {
         return User::create(array_merge([
-            'email' => "{$description}@paddle-test.com",
+            'email' => "{$description}@btcpay-test.com",
             'name' => 'Taylor Otwell',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         ], $options));

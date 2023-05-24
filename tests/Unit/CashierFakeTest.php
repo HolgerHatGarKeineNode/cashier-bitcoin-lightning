@@ -4,9 +4,9 @@ namespace Tests\Unit;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
-use Bitcoin\Lightning\Lnbits\Cashier;
-use Bitcoin\Lightning\Lnbits\CashierFake;
-use Bitcoin\Lightning\Lnbits\Exceptions\LnbitsException;
+use Cashier\BtcPayServer\Cashier;
+use Cashier\BtcPayServer\CashierFake;
+use Cashier\BtcPayServer\Exceptions\LnbitsException;
 use Tests\Feature\FeatureTestCase;
 
 class CashierFakeTest extends FeatureTestCase

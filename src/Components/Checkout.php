@@ -1,6 +1,6 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits\Components;
+namespace Cashier\BtcPayServer\Components;
 
 use Illuminate\View\Component;
 
@@ -36,7 +36,7 @@ class Checkout extends Component
      * @param  array  $options
      * @return void
      */
-    public function __construct(string $override = '', $id = 'paddle-checkout', int $height = 366, array $options = [])
+    public function __construct(string $override = '', $id = 'btcpay-checkout', int $height = 366, array $options = [])
     {
         $this->id = $id;
         $this->height = $height;

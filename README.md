@@ -1,4 +1,4 @@
-# Laravel Cashier Bitcoin Lightning (LNbits)
+# Laravel Cashier BTCPay Server (LNbits)
 
 <p align="center">
 
@@ -6,7 +6,7 @@
 
 ## Introduction
 
-Laravel Cashier Bitcoin Lightning provides an expressive, fluent interface to [Bitcoin's Lightning LNbits](https://lnbits.com/) payment services. It handles almost all of the boilerplate subscription billing code you are dreading writing. In addition to basic subscription management, Cashier can handle coupons, swapping subscription, subscription "quantities", cancellation grace periods and much more.
+Laravel Cashier BTCPay Server provides an expressive, fluent interface to [Bitcoin's Lightning LNbits](https://lnbits.com/) payment services. It handles almost all of the boilerplate subscription billing code you are dreading writing. In addition to basic subscription management, Cashier can handle coupons, swapping subscription, subscription "quantities", cancellation grace periods and much more.
 
 ## Documentation
 
@@ -14,7 +14,7 @@ WIP
 
 ## Contributing
 
-Thank you for considering contributing to Cashier Bitcoin Lightning! You can read the contribution guide [here](.github/CONTRIBUTING.md).
+Thank you for considering contributing to Cashier BTCPay Server! You can read the contribution guide [here](.github/CONTRIBUTING.md).
 
 ## Code of Conduct
 
@@ -26,4 +26,4 @@ Report to <a href="fsociety.mkv@pm.me">fsociety.mkv@pm.me</a>
 
 ## License
 
-Laravel Cashier Bitcoin Lightning is open-sourced software licensed under the [MIT license](LICENSE.md).
+Laravel Cashier BTCPay Server is open-sourced software licensed under the [MIT license](LICENSE.md).

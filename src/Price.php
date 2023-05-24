@@ -1,8 +1,8 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits;
+namespace Cashier\BtcPayServer;
 
-use Bitcoin\Lightning\Lnbits\Concerns\ManagesAmounts;
+use Cashier\BtcPayServer\Concerns\ManagesAmounts;
 use Money\Currency;
 
 class Price

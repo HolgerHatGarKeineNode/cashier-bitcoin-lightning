@@ -1,11 +1,11 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits\Events;
+namespace Cashier\BtcPayServer\Events;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Bitcoin\Lightning\Lnbits\Subscription;
+use Cashier\BtcPayServer\Subscription;
 
 class SubscriptionCreated
 {
@@ -21,7 +21,7 @@ class SubscriptionCreated
     /**
      * The subscription instance.
      *
-     * @var \Bitcoin\Lightning\Lnbits\Subscription
+     * @var \Cashier\BtcPayServer\Subscription
      */
     public $subscription;
 
@@ -36,7 +36,7 @@ class SubscriptionCreated
      * Create a new event instance.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $billable
-     * @param  \Bitcoin\Lightning\Lnbits\Subscription  $subscription
+     * @param  \Cashier\BtcPayServer\Subscription  $subscription
      * @param  array  $payload
      * @return void
      */

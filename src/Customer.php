@@ -1,11 +1,11 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits;
+namespace Cashier\BtcPayServer;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property \Bitcoin\Lightning\Lnbits\Billable $billable
+ * @property \Cashier\BtcPayServer\Billable $billable
  */
 class Customer extends Model
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits\Http\Middleware;
+namespace Cashier\BtcPayServer\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
- * @see https://developer.paddle.com/webhook-reference/verifying-webhooks
+ * @see https://developer.btcpay.com/webhook-reference/verifying-webhooks
  */
 class VerifyWebhookSignature
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits\Concerns;
+namespace Cashier\BtcPayServer\Concerns;
 
-use Bitcoin\Lightning\Lnbits\Cashier;
-use Bitcoin\Lightning\Lnbits\Subscription;
-use Bitcoin\Lightning\Lnbits\SubscriptionBuilder;
+use Cashier\BtcPayServer\Cashier;
+use Cashier\BtcPayServer\Subscription;
+use Cashier\BtcPayServer\SubscriptionBuilder;
 
 trait ManagesSubscriptions
 {
@@ -13,7 +13,7 @@ trait ManagesSubscriptions
      *
      * @param  string  $name
      * @param  int  $plan
-     * @return \Bitcoin\Lightning\Lnbits\SubscriptionBuilder
+     * @return \Cashier\BtcPayServer\SubscriptionBuilder
      */
     public function newSubscription($name, $plan)
     {
@@ -34,7 +34,7 @@ trait ManagesSubscriptions
      * Get a subscription instance by name.
      *
      * @param  string  $name
-     * @return \Bitcoin\Lightning\Lnbits\Subscription|null
+     * @return \Cashier\BtcPayServer\Subscription|null
      */
     public function subscription($name = 'default')
     {
@@ -173,7 +173,7 @@ trait ManagesSubscriptions
     public function onPlan($plan)
     {
         return ! is_null($this->subscriptions()
-            ->where('paddle_plan', $plan)
+            ->where('btcpay_plan', $plan)
             ->get()
             ->first(function (Subscription $subscription) {
                 return $subscription->valid();

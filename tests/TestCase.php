@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Bitcoin\Lightning\Lnbits\CashierServiceProvider;
+use Cashier\BtcPayServer\CashierServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends OrchestraTestCase

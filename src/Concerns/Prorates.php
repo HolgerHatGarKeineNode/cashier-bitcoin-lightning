@@ -1,6 +1,6 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits\Concerns;
+namespace Cashier\BtcPayServer\Concerns;
 
 trait Prorates
 {

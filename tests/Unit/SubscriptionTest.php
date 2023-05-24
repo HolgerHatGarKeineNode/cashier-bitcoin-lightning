@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Bitcoin\Lightning\Lnbits\Subscription;
+use Cashier\BtcPayServer\Subscription;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 

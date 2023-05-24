@@ -2,19 +2,19 @@
 
 namespace Tests\Feature;
 
-use Bitcoin\Lightning\Lnbits\Cashier;
-use Bitcoin\Lightning\Lnbits\Events\PaymentSucceeded;
-use Bitcoin\Lightning\Lnbits\Events\SubscriptionCancelled;
-use Bitcoin\Lightning\Lnbits\Events\SubscriptionCreated;
-use Bitcoin\Lightning\Lnbits\Events\SubscriptionPaymentSucceeded;
-use Bitcoin\Lightning\Lnbits\Events\SubscriptionUpdated;
-use Bitcoin\Lightning\Lnbits\Subscription;
+use Cashier\BtcPayServer\Cashier;
+use Cashier\BtcPayServer\Events\PaymentSucceeded;
+use Cashier\BtcPayServer\Events\SubscriptionCancelled;
+use Cashier\BtcPayServer\Events\SubscriptionCreated;
+use Cashier\BtcPayServer\Events\SubscriptionPaymentSucceeded;
+use Cashier\BtcPayServer\Events\SubscriptionUpdated;
+use Cashier\BtcPayServer\Subscription;
 
 class WebhooksTest extends FeatureTestCase
 {
     public function test_gracefully_handle_webhook_without_alert_name()
     {
-        $this->postJson('paddle/webhook', [
+        $this->postJson('btcpay/webhook', [
             'event_time' => now()->addDay()->format('Y-m-d H:i:s'),
         ])->assertOk();
     }
@@ -25,12 +25,12 @@ class WebhooksTest extends FeatureTestCase
 
         $user = $this->createUser();
 
-        $this->postJson('paddle/webhook', [
+        $this->postJson('btcpay/webhook', [
             'alert_name' => 'payment_succeeded',
             'event_time' => $paidAt = now()->addDay()->format('Y-m-d H:i:s'),
             'checkout_id' => 12345,
             'order_id' => 'foo',
-            'email' => $user->paddleEmail(),
+            'email' => $user->btcpayEmail(),
             'sale_gross' => '12.55',
             'payment_tax' => '4.34',
             'currency' => 'EUR',
@@ -50,7 +50,7 @@ class WebhooksTest extends FeatureTestCase
         $this->assertDatabaseHas('receipts', [
             'billable_id' => $user->id,
             'billable_type' => $user->getMorphClass(),
-            'paddle_subscription_id' => null,
+            'btcpay_subscription_id' => null,
             'paid_at' => $paidAt,
             'checkout_id' => 12345,
             'order_id' => 'foo',
@@ -74,12 +74,12 @@ class WebhooksTest extends FeatureTestCase
             'trial_ends_at' => now('UTC')->addDays(5),
         ]);
 
-        $this->postJson('paddle/webhook', [
+        $this->postJson('btcpay/webhook', [
             'alert_name' => 'payment_succeeded',
             'event_time' => $paidAt = now()->addDay()->format('Y-m-d H:i:s'),
             'checkout_id' => 12345,
             'order_id' => 'foo',
-            'email' => $user->paddleEmail(),
+            'email' => $user->btcpayEmail(),
             'sale_gross' => '12.55',
             'payment_tax' => '4.34',
             'currency' => 'EUR',
@@ -99,7 +99,7 @@ class WebhooksTest extends FeatureTestCase
         $this->assertDatabaseHas('receipts', [
             'billable_id' => $user->id,
             'billable_type' => $user->getMorphClass(),
-            'paddle_subscription_id' => null,
+            'btcpay_subscription_id' => null,
             'paid_at' => $paidAt,
             'checkout_id' => 12345,
             'order_id' => 'foo',
@@ -123,19 +123,19 @@ class WebhooksTest extends FeatureTestCase
 
         $subscription = $user->subscriptions()->create([
             'name' => 'main',
-            'paddle_id' => 244,
-            'paddle_plan' => 2323,
-            'paddle_status' => Subscription::STATUS_ACTIVE,
+            'btcpay_id' => 244,
+            'btcpay_plan' => 2323,
+            'btcpay_status' => Subscription::STATUS_ACTIVE,
             'quantity' => 1,
         ]);
 
-        $this->postJson('paddle/webhook', [
+        $this->postJson('btcpay/webhook', [
             'alert_name' => 'subscription_payment_succeeded',
             'event_time' => $paidAt = now()->addDay()->format('Y-m-d H:i:s'),
-            'subscription_id' => $subscription->paddle_id,
+            'subscription_id' => $subscription->btcpay_id,
             'checkout_id' => 12345,
             'order_id' => 'foo',
-            'email' => $user->paddleEmail(),
+            'email' => $user->btcpayEmail(),
             'sale_gross' => '12.55',
             'payment_tax' => '4.34',
             'currency' => 'EUR',
@@ -155,7 +155,7 @@ class WebhooksTest extends FeatureTestCase
         $this->assertDatabaseHas('receipts', [
             'billable_id' => $user->id,
             'billable_type' => $user->getMorphClass(),
-            'paddle_subscription_id' => $subscription->paddle_id,
+            'btcpay_subscription_id' => $subscription->btcpay_id,
             'paid_at' => $paidAt,
             'checkout_id' => 12345,
             'order_id' => 'foo',
@@ -177,10 +177,10 @@ class WebhooksTest extends FeatureTestCase
 
         $user = $this->createUser();
 
-        $this->postJson('paddle/webhook', [
+        $this->postJson('btcpay/webhook', [
             'alert_name' => 'subscription_created',
             'user_id' => 'foo',
-            'email' => $user->paddleEmail(),
+            'email' => $user->btcpayEmail(),
             'passthrough' => json_encode([
                 'billable_id' => $user->id,
                 'billable_type' => $user->getMorphClass(),
@@ -201,15 +201,15 @@ class WebhooksTest extends FeatureTestCase
             'billable_id' => $user->id,
             'billable_type' => $user->getMorphClass(),
             'name' => 'main',
-            'paddle_id' => 'bar',
-            'paddle_plan' => 1234,
-            'paddle_status' => Subscription::STATUS_ACTIVE,
+            'btcpay_id' => 'bar',
+            'btcpay_plan' => 1234,
+            'btcpay_status' => Subscription::STATUS_ACTIVE,
             'quantity' => 1,
             'trial_ends_at' => null,
         ]);
 
         Cashier::assertSubscriptionCreated(function (SubscriptionCreated $event) use ($user) {
-            return $event->billable->id === $user->id && $event->subscription->paddle_plan === 1234;
+            return $event->billable->id === $user->id && $event->subscription->btcpay_plan === 1234;
         });
     }
 
@@ -222,10 +222,10 @@ class WebhooksTest extends FeatureTestCase
             'trial_ends_at' => now('UTC')->addDays(5),
         ]);
 
-        $this->postJson('paddle/webhook', [
+        $this->postJson('btcpay/webhook', [
             'alert_name' => 'subscription_created',
             'user_id' => 'foo',
-            'email' => $user->paddleEmail(),
+            'email' => $user->btcpayEmail(),
             'passthrough' => json_encode([
                 'billable_id' => $user->id,
                 'billable_type' => $user->getMorphClass(),
@@ -246,15 +246,15 @@ class WebhooksTest extends FeatureTestCase
             'billable_id' => $user->id,
             'billable_type' => $user->getMorphClass(),
             'name' => 'main',
-            'paddle_id' => 'bar',
-            'paddle_plan' => 1234,
-            'paddle_status' => Subscription::STATUS_ACTIVE,
+            'btcpay_id' => 'bar',
+            'btcpay_plan' => 1234,
+            'btcpay_status' => Subscription::STATUS_ACTIVE,
             'quantity' => 1,
             'trial_ends_at' => null,
         ]);
 
         Cashier::assertSubscriptionCreated(function (SubscriptionCreated $event) use ($user) {
-            return $event->billable->id === $user->id && $event->subscription->paddle_plan === 1234;
+            return $event->billable->id === $user->id && $event->subscription->btcpay_plan === 1234;
         });
     }
 
@@ -266,13 +266,13 @@ class WebhooksTest extends FeatureTestCase
 
         $subscription = $billable->subscriptions()->create([
             'name' => 'main',
-            'paddle_id' => 244,
-            'paddle_plan' => 2323,
-            'paddle_status' => Subscription::STATUS_ACTIVE,
+            'btcpay_id' => 244,
+            'btcpay_plan' => 2323,
+            'btcpay_status' => Subscription::STATUS_ACTIVE,
             'quantity' => 1,
         ]);
 
-        $this->postJson('paddle/webhook', [
+        $this->postJson('btcpay/webhook', [
             'alert_name' => 'subscription_updated',
             'new_quantity' => 3,
             'status' => Subscription::STATUS_PAUSED,
@@ -286,15 +286,15 @@ class WebhooksTest extends FeatureTestCase
             'billable_id' => $billable->id,
             'billable_type' => $billable->getMorphClass(),
             'name' => 'main',
-            'paddle_id' => 244,
-            'paddle_plan' => 1234,
-            'paddle_status' => Subscription::STATUS_PAUSED,
+            'btcpay_id' => 244,
+            'btcpay_plan' => 1234,
+            'btcpay_status' => Subscription::STATUS_PAUSED,
             'quantity' => 3,
             'paused_from' => $date,
         ]);
 
         Cashier::assertSubscriptionUpdated(function (SubscriptionUpdated $event) {
-            return $event->subscription->paddle_plan === 1234;
+            return $event->subscription->btcpay_plan === 1234;
         });
     }
 
@@ -306,13 +306,13 @@ class WebhooksTest extends FeatureTestCase
 
         $subscription = $billable->subscriptions()->create([
             'name' => 'main',
-            'paddle_id' => 244,
-            'paddle_plan' => 2323,
-            'paddle_status' => Subscription::STATUS_ACTIVE,
+            'btcpay_id' => 244,
+            'btcpay_plan' => 2323,
+            'btcpay_status' => Subscription::STATUS_ACTIVE,
             'quantity' => 1,
         ]);
 
-        $this->postJson('paddle/webhook', [
+        $this->postJson('btcpay/webhook', [
             'alert_name' => 'subscription_cancelled',
             'status' => Subscription::STATUS_DELETED,
             'cancellation_effective_date' => ($date = now('UTC')->addDays(5)->startOfDay())->format('Y-m-d'),
@@ -324,14 +324,14 @@ class WebhooksTest extends FeatureTestCase
             'billable_id' => $billable->id,
             'billable_type' => $billable->getMorphClass(),
             'name' => 'main',
-            'paddle_id' => 244,
-            'paddle_plan' => 2323,
-            'paddle_status' => Subscription::STATUS_DELETED,
+            'btcpay_id' => 244,
+            'btcpay_plan' => 2323,
+            'btcpay_status' => Subscription::STATUS_DELETED,
             'ends_at' => $date,
         ]);
 
         Cashier::assertSubscriptionCancelled(function (SubscriptionCancelled $event) {
-            return $event->subscription->paddle_plan === 2323;
+            return $event->subscription->btcpay_plan === 2323;
         });
     }
 
@@ -341,10 +341,10 @@ class WebhooksTest extends FeatureTestCase
 
         $user = $this->createUser();
 
-        $this->postJson('paddle/webhook', [
+        $this->postJson('btcpay/webhook', [
             'alert_name' => 'subscription_created',
             'user_id' => 'foo',
-            'email' => $user->paddleEmail(),
+            'email' => $user->btcpayEmail(),
             'passthrough' => '',
             'quantity' => 1,
             'status' => Subscription::STATUS_ACTIVE,
@@ -361,9 +361,9 @@ class WebhooksTest extends FeatureTestCase
             'billable_id' => $user->id,
             'billable_type' => $user->getMorphClass(),
             'name' => 'main',
-            'paddle_id' => 'bar',
-            'paddle_plan' => 1234,
-            'paddle_status' => Subscription::STATUS_ACTIVE,
+            'btcpay_id' => 'bar',
+            'btcpay_plan' => 1234,
+            'btcpay_status' => Subscription::STATUS_ACTIVE,
             'quantity' => 1,
             'trial_ends_at' => null,
         ]);

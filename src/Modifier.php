@@ -1,8 +1,8 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits;
+namespace Cashier\BtcPayServer;
 
-use Bitcoin\Lightning\Lnbits\Concerns\ManagesAmounts;
+use Cashier\BtcPayServer\Concerns\ManagesAmounts;
 use Money\Currency;
 
 class Modifier
@@ -12,7 +12,7 @@ class Modifier
     /**
      * The Subscription model the modifier belongs to.
      *
-     * @var \Bitcoin\Lightning\Lnbits\Subscription
+     * @var \Cashier\BtcPayServer\Subscription
      */
     protected $subscription;
 
@@ -26,7 +26,7 @@ class Modifier
     /**
      * Create a new modifier instance.
      *
-     * @param  \Bitcoin\Lightning\Lnbits\Subscription  $subscription
+     * @param  \Cashier\BtcPayServer\Subscription  $subscription
      * @param  array  $modifier
      * @return void
      */
@@ -49,7 +49,7 @@ class Modifier
     /**
      * Get the related subscription.
      *
-     * @return \Bitcoin\Lightning\Lnbits\Subscription
+     * @return \Cashier\BtcPayServer\Subscription
      */
     public function subscription()
     {
@@ -113,7 +113,7 @@ class Modifier
      */
     public function delete()
     {
-        $payload = $this->subscription->billable->paddleOptions([
+        $payload = $this->subscription->billable->btcpayOptions([
             'modifier_id' => $this->id(),
         ]);
 

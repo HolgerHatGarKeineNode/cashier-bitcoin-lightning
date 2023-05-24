@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use Bitcoin\Lightning\Lnbits\Price;
-use Bitcoin\Lightning\Lnbits\ProductPrice;
+use Cashier\BtcPayServer\Price;
+use Cashier\BtcPayServer\ProductPrice;
 use Money\Currency;
 use PHPUnit\Framework\TestCase;
 
@@ -97,7 +97,7 @@ class ProductPriceTest extends TestCase
      * Get a test product price object.
      *
      * @param  array  $product
-     * @return \Bitcoin\Lightning\Lnbits\ProductPrice
+     * @return \Cashier\BtcPayServer\ProductPrice
      */
     private function product(array $product = [])
     {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits;
+namespace Cashier\BtcPayServer;
 
 use Illuminate\Database\Eloquent\Model;
-use Bitcoin\Lightning\Lnbits\Concerns\ManagesAmounts;
+use Cashier\BtcPayServer\Concerns\ManagesAmounts;
 use Money\Currency;
 
 class Receipt extends Model
@@ -44,7 +44,7 @@ class Receipt extends Model
      */
     public function subscription()
     {
-        return $this->belongsTo(Cashier::$subscriptionModel, 'paddle_subscription_id', 'paddle_id');
+        return $this->belongsTo(Cashier::$subscriptionModel, 'btcpay_subscription_id', 'btcpay_id');
     }
 
     /**

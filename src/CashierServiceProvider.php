@@ -1,11 +1,11 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits;
+namespace Cashier\BtcPayServer;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Bitcoin\Lightning\Lnbits\Components\Checkout;
+use Cashier\BtcPayServer\Components\Checkout;
 
 class CashierServiceProvider extends ServiceProvider
 {
@@ -46,7 +46,7 @@ class CashierServiceProvider extends ServiceProvider
         if (Cashier::$registersRoutes) {
             Route::group([
                 'prefix' => config('cashier.path'),
-                'namespace' => 'Bitcoin\Lightning\Lnbits\Http\Controllers',
+                'namespace' => 'Cashier\BtcPayServer\Http\Controllers',
                 'as' => 'cashier.',
             ], function () {
                 $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
@@ -105,7 +105,7 @@ class CashierServiceProvider extends ServiceProvider
      */
     protected function bootDirectives()
     {
-        Blade::directive('paddleJS', function () {
+        Blade::directive('btcpayJS', function () {
             return "<?php echo view('cashier::js'); ?>";
         });
     }
@@ -117,7 +117,7 @@ class CashierServiceProvider extends ServiceProvider
      */
     protected function bootComponents()
     {
-        Blade::component('cashier::components.button', 'paddle-button');
-        Blade::component(Checkout::class, 'paddle-checkout');
+        Blade::component('cashier::components.button', 'btcpay-button');
+        Blade::component(Checkout::class, 'btcpay-checkout');
     }
 }

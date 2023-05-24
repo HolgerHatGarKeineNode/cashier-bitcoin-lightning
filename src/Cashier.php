@@ -1,9 +1,9 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits;
+namespace Cashier\BtcPayServer;
 
 use Illuminate\Support\Facades\Http;
-use Bitcoin\Lightning\Lnbits\Exceptions\LnbitsException;
+use Cashier\BtcPayServer\Exceptions\LnbitsException;
 use Money\Currencies\ISOCurrencies;
 use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
@@ -98,7 +98,7 @@ class Cashier
      */
     public static function vendorsUrl()
     {
-        return 'https://'.(config('cashier.sandbox') ? 'sandbox-' : '').'vendors.paddle.com';
+        return 'https://'.(config('cashier.sandbox') ? 'sandbox-' : '').'vendors.btcpay.com';
     }
 
     /**
@@ -108,7 +108,7 @@ class Cashier
      */
     public static function checkoutUrl()
     {
-        return 'https://'.(config('cashier.sandbox') ? 'sandbox-' : '').'checkout.paddle.com';
+        return 'https://'.(config('cashier.sandbox') ? 'sandbox-' : '').'checkout.btcpay.com';
     }
 
     /**
@@ -118,7 +118,7 @@ class Cashier
      * @param  array  $payload
      * @return \Illuminate\Http\Client\Response
      *
-     * @throws \Bitcoin\Lightning\Lnbits\Exceptions\LnbitsException
+     * @throws \Cashier\BtcPayServer\Exceptions\LnbitsException
      */
     public static function get($uri, array $payload = [])
     {
@@ -132,7 +132,7 @@ class Cashier
      * @param  array  $payload
      * @return \Illuminate\Http\Client\Response
      *
-     * @throws \Bitcoin\Lightning\Lnbits\Exceptions\LnbitsException
+     * @throws \Cashier\BtcPayServer\Exceptions\LnbitsException
      */
     public static function post($uri, array $payload = [])
     {
@@ -147,7 +147,7 @@ class Cashier
      * @param  array  $payload
      * @return \Illuminate\Http\Client\Response
      *
-     * @throws \Bitcoin\Lightning\Lnbits\Exceptions\LnbitsException
+     * @throws \Cashier\BtcPayServer\Exceptions\LnbitsException
      */
     protected static function makeApiCall($method, $uri, array $payload = [])
     {
@@ -166,7 +166,7 @@ class Cashier
      * @param  array  $options
      * @return array
      */
-    public static function paddleOptions(array $options = [])
+    public static function btcpayOptions(array $options = [])
     {
         return array_merge([
             'vendor_id' => (int) config('cashier.vendor_id'),
@@ -298,7 +298,7 @@ class Cashier
     /**
      * Create a fake Cashier instance.
      *
-     * @return \Bitcoin\Lightning\Lnbits\CashierFake
+     * @return \Cashier\BtcPayServer\CashierFake
      */
     public static function fake(...$arguments)
     {

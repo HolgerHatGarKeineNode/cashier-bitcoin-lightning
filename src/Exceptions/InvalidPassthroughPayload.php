@@ -1,6 +1,6 @@
 <?php
 
-namespace Bitcoin\Lightning\Lnbits\Exceptions;
+namespace Cashier\BtcPayServer\Exceptions;
 
 use Exception;
 
